@@ -1,1094 +1,295 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dual Frame Creative</title>
-  <meta name="description" content="Human-crafted. AI-powered. Short-form content that performs.">
-  
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='15' y='15' width='70' height='70' fill='none' stroke='%238B5CF6' stroke-width='4' rx='8' transform='rotate(-5 50 50)'/><rect x='25' y='25' width='50' height='50' fill='none' stroke='%2300ff88' stroke-width='3' rx='6' transform='rotate(5 50 50)'/></svg>">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    :root {
-      --bg: #09090b;
-      --bg-elevated: #111113;
-      --text: #fafafa;
-      --text-secondary: rgba(250, 250, 250, 0.5);
-      --text-tertiary: rgba(250, 250, 250, 0.3);
-      --purple: #8B5CF6;
-      --green: #00ff88;
-      --border: rgba(255, 255, 255, 0.06);
-      --glass: rgba(255, 255, 255, 0.02);
-      --glass-border: rgba(255, 255, 255, 0.05);
-    }
-    
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      font-weight: 300;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    ::selection {
-      background: var(--purple);
-      color: white;
-    }
-    
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: rgba(139, 92, 246, 0.3);
-      border-radius: 3px;
-    }
-    
-    /* Typography */
-    .display {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-    }
-    
-    .label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-    
-    /* Utility */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 clamp(24px, 5vw, 80px);
-    }
-    
-    /* Ambient */
-    .ambient {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.4;
-    }
-    
-    .orb-1 {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-      top: -200px;
-      right: -100px;
-      animation: drift 20s ease-in-out infinite;
-    }
-    
-    .orb-2 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, transparent 70%);
-      bottom: 20%;
-      left: -100px;
-      animation: drift 25s ease-in-out infinite reverse;
-    }
-    
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(30px, -20px) scale(1.05); }
-      50% { transform: translate(-20px, 30px) scale(0.95); }
-      75% { transform: translate(20px, 20px) scale(1.02); }
-    }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 24px 0;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    nav.scrolled {
-      padding: 16px 0;
-      background: rgba(9, 9, 11, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: var(--text);
-    }
-    
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      position: relative;
-    }
-    
-    .logo-mark::before,
-    .logo-mark::after {
-      content: '';
-      position: absolute;
-      border-radius: 6px;
-    }
-    
-    .logo-mark::before {
-      inset: 0;
-      border: 1.5px solid var(--purple);
-      transform: rotate(-6deg);
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-    }
-    
-    .logo-mark::after {
-      inset: 6px;
-      border: 1.5px solid var(--green);
-      transform: rotate(6deg);
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
-    }
-    
-    .logo-text {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-    
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-    
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--green);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-      color: var(--text);
-    }
-    
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    
-    .nav-cta {
-      padding: 10px 20px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 400;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: inherit;
-    }
-    
-    .nav-cta:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 160px 0 120px;
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 40px;
-      padding: 8px 16px 8px 10px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 100px;
-      backdrop-filter: blur(10px);
-    }
-    
-    .hero-eyebrow .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--green);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    
-    .hero-eyebrow span {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      color: var(--text-secondary);
-    }
-    
-    .hero h1 {
-      font-size: clamp(56px, 12vw, 140px);
-      margin-bottom: 32px;
-      max-width: 1100px;
-    }
-    
-    .hero h1 .line {
-      display: block;
-      overflow: hidden;
-    }
-    
-    .hero h1 .gradient {
-      background: linear-gradient(135deg, var(--purple) 0%, var(--green) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .hero h1 .thin {
-      font-weight: 400;
-      color: var(--text-secondary);
-    }
-    
-    .hero-sub {
-      font-size: clamp(16px, 2vw, 20px);
-      color: var(--text-secondary);
-      max-width: 500px;
-      margin-bottom: 48px;
-      font-weight: 300;
-    }
-    
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      font-family: inherit;
-      text-decoration: none;
-    }
-    
-    .btn-primary {
-      background: var(--text);
-      color: var(--bg);
-      border: none;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
-    }
-    
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    
-    .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.03);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      margin-top: 100px;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    
-    .stat {
-      background: var(--bg);
-      padding: 40px;
-      text-align: center;
-    }
-    
-    .stat-value {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      letter-spacing: 0.02em;
-    }
-    
-    /* Sections */
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 140px 0;
-    }
-    
-    .section-header {
-      margin-bottom: 80px;
-    }
-    
-    .section-header .label {
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .section-header .label::before {
-      content: '';
-      width: 24px;
-      height: 1px;
-      background: var(--purple);
-    }
-    
-    .section-header h2 {
-      font-size: clamp(40px, 8vw, 72px);
-    }
-    
-    /* Services */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    
-    .service {
-      background: var(--bg);
-      padding: clamp(40px, 6vw, 80px);
-      position: relative;
-      transition: all 0.4s ease;
-    }
-    
-    .service::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    
-    .service:hover::before {
-      opacity: 1;
-    }
-    
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 32px;
-      font-size: 20px;
-      color: var(--purple);
-      transition: all 0.3s ease;
-    }
-    
-    .service:hover .service-icon {
-      border-color: var(--purple);
-      box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
-    }
-    
-    .service h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(24px, 3vw, 32px);
-      font-weight: 600;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-    
-    .service p {
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    
-    /* Work */
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-    
-    .work-item {
-      position: relative;
-      aspect-ratio: 16/11;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .work-item:hover {
-      transform: translateY(-8px);
-      border-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
-    }
-    
-    .work-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(9, 9, 11, 0.95) 100%);
-      z-index: 1;
-    }
-    
-    .work-bg {
-      position: absolute;
-      inset: 0;
-      opacity: 0.6;
-      transition: all 0.5s ease;
-    }
-    
-    .work-item:hover .work-bg {
-      transform: scale(1.05);
-      opacity: 0.8;
-    }
-    
-    .work-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 32px;
-      z-index: 2;
-    }
-    
-    .work-category {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 12px;
-    }
-    
-    .work-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(24px, 3vw, 32px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    
-    .work-client {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-    
-    /* Testimonials */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    
-    .testimonial {
-      padding: 40px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      transition: all 0.4s ease;
-    }
-    
-    .testimonial:hover {
-      border-color: rgba(139, 92, 246, 0.2);
-      transform: translateY(-4px);
-    }
-    
-    .testimonial-text {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-    }
-    
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    
-    .testimonial-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple), var(--green));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 600;
-    }
-    
-    .testimonial-name {
-      font-weight: 500;
-      font-size: 14px;
-      margin-bottom: 2px;
-    }
-    
-    .testimonial-role {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-    
-    /* FAQ */
-    .faq-list {
-      max-width: 800px;
-    }
-    
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-      padding: 32px 0;
-      cursor: pointer;
-    }
-    
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-    }
-    
-    .faq-question h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      transition: color 0.3s ease;
-    }
-    
-    .faq-item:hover .faq-question h3 {
-      color: var(--purple);
-    }
-    
-    .faq-toggle {
-      width: 32px;
-      height: 32px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-      flex-shrink: 0;
-    }
-    
-    .faq-item.open .faq-toggle {
-      transform: rotate(45deg);
-      border-color: var(--purple);
-      color: var(--purple);
-    }
-    
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .faq-item.open .faq-answer {
-      max-height: 200px;
-      padding-top: 20px;
-    }
-    
-    .faq-answer p {
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-    
-    /* CTA */
-    .cta {
-      text-align: center;
-      padding: 180px 0;
-    }
-    
-    .cta-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    
-    .cta h2 {
-      font-size: clamp(48px, 10vw, 80px);
-      margin-bottom: 24px;
-    }
-    
-    .cta p {
-      font-size: 18px;
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-      max-width: 450px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 60px 0;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .footer-links {
-      display: flex;
-      gap: 32px;
-    }
-    
-    .footer-links a {
-      color: var(--text-tertiary);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.3s ease;
-    }
-    
-    .footer-links a:hover {
-      color: var(--text);
-    }
-    
-    .footer-copy {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-    
-    /* Mobile Menu */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      flex-direction: column;
-      gap: 5px;
-    }
-    
-    .menu-toggle span {
-      display: block;
-      width: 20px;
-      height: 1.5px;
-      background: var(--text);
-      transition: all 0.3s ease;
-    }
-    
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .work-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-    }
-    
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .menu-toggle { display: flex; }
-      .stats { grid-template-columns: 1fr; }
-      .hero h1 { font-size: clamp(40px, 12vw, 80px); }
-      .footer-content { flex-direction: column; gap: 24px; text-align: center; }
-    }
-  </style>
-</head>
-<body>
-  <div class="ambient">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DualFrameCreative | Performance Ads Studio</title>
+    <meta
+      name="description"
+      content="Stop scrolls. Capture demand. DualFrameCreative engineers high-converting short-form ad systems for modern brands."
+    />
 
-  <nav id="nav">
-    <div class="container">
-      <a href="#" class="logo">
-        <div class="logo-mark"></div>
-        <span class="logo-text">Dual Frame</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <button class="nav-cta">Get in touch</button>
-      <button class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+    <meta property="og:title" content="DualFrameCreative" />
+    <meta
+      property="og:description"
+      content="High-converting ad systems. Human grit meets AI speed."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://replit.com/public/images/opengraph.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@replit" />
 
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="dot"></span>
-          <span>Accepting new clients</span>
-        </div>
-        
-        <h1 class="display">
-          <span class="line">Content that</span>
-          <span class="line"><span class="gradient">performs</span></span>
-        </h1>
-        
-        <p class="hero-sub">
-          Human-crafted creativity. AI-powered precision. 
-          Short-form content built to convert.
-        </p>
-        
-        <div class="hero-actions">
-          <button class="btn btn-primary">Start a project</button>
-          <button class="btn btn-ghost">View work</button>
-        </div>
-        
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-value">50M+</div>
-            <div class="stat-label">Views generated</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">340%</div>
-            <div class="stat-label">Avg. engagement lift</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">48h</div>
-            <div class="stat-label">Avg. turnaround</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <style>
+      :root {
+        --bg: #09090b;
+        --bg2: #0b0b12;
+        --text: #fafafa;
+        --muted: rgba(250, 250, 250, 0.6);
+        --muted2: rgba(250, 250, 250, 0.4);
+        --border: rgba(255, 255, 255, 0.08);
+        --glass: rgba(255, 255, 255, 0.08);
+        --glass2: rgba(255, 255, 255, 0.03);
+        --purple: #8b5cf6;
+        --green: #00ff88;
+      }
 
-  <section id="work">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Selected work</div>
-        <h2 class="display">Recent projects</h2>
-      </div>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; color-scheme: dark; }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 15% 10%, rgba(139, 92, 246, 0.15), transparent 55%),
+                    radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.08), transparent 55%),
+                    linear-gradient(180deg, var(--bg), var(--bg2));
+        color: var(--text);
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap { position: relative; overflow: hidden; min-height: 100svh; }
       
-      <div class="work-grid">
-        <div class="work-item">
-          <div class="work-bg" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);"></div>
-          <div class="work-content">
-            <div class="work-category">Brand Campaign</div>
-            <h3 class="work-title">Neon Pulse</h3>
-            <p class="work-client">TechStart Inc.</p>
-          </div>
-        </div>
-        
-        <div class="work-item">
-          <div class="work-bg" style="background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%);"></div>
-          <div class="work-content">
-            <div class="work-category">Product Launch</div>
-            <h3 class="work-title">Echo Chamber</h3>
-            <p class="work-client">SoundWave Audio</p>
-          </div>
-        </div>
-        
-        <div class="work-item">
-          <div class="work-bg" style="background: linear-gradient(135deg, #0a1a1a 0%, #0d2828 100%);"></div>
-          <div class="work-content">
-            <div class="work-category">Social Content</div>
-            <h3 class="work-title">Velocity</h3>
-            <p class="work-client">SpeedFit Gym</p>
-          </div>
-        </div>
-        
-        <div class="work-item">
-          <div class="work-bg" style="background: linear-gradient(135deg, #1a0a1a 0%, #2e1a2e 100%);"></div>
-          <div class="work-content">
-            <div class="work-category">Brand Film</div>
-            <h3 class="work-title">Prism</h3>
-            <p class="work-client">Luxe Fashion</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      .grid {
+        position: absolute; inset: 0;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(circle at 30% 15%, black 0%, transparent 60%);
+        opacity: 0.4; pointer-events: none;
+      }
 
-  <section id="services">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">What we do</div>
-        <h2 class="display">Services</h2>
-      </div>
-      
-      <div class="services-grid">
-        <div class="service">
-          <div class="service-icon">◈</div>
-          <h3>Short-Form Video</h3>
-          <p>Scroll-stopping content for TikTok, Reels, and Shorts. Engineered to capture attention in the first frame and hold it.</p>
-        </div>
-        
-        <div class="service">
-          <div class="service-icon">◇</div>
-          <h3>AI-Enhanced Editing</h3>
-          <p>Cutting-edge AI tools accelerate our workflow without compromising craft. Faster delivery, same obsessive attention to detail.</p>
-        </div>
-        
-        <div class="service">
-          <div class="service-icon">◆</div>
-          <h3>Brand Storytelling</h3>
-          <p>Narratives that resonate. We distill complex brand stories into compelling content that builds genuine connection.</p>
-        </div>
-        
-        <div class="service">
-          <div class="service-icon">⬡</div>
-          <h3>Motion Graphics</h3>
-          <p>Dynamic animations and visual effects that elevate your content. From subtle polish to full-scale motion design.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      .noise::before {
+        content: ""; pointer-events: none; position: absolute; inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+        mix-blend-mode: overlay; opacity: 0.3;
+      }
 
-  <section id="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Testimonials</div>
-        <h2 class="display">Client feedback</h2>
-      </div>
+      .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; }
+
+      .nav {
+        position: sticky; top: 0; z-index: 50;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(9, 9, 11, 0.6);
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      }
+
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+
+      .brand {
+        display: flex; align-items: center; gap: 12px;
+        text-decoration: none; color: var(--text);
+        font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-dot {
+        width: 38px; height: 38px; border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04); position: relative; overflow: hidden;
+      }
+
+      .brand-dot::after {
+        content: ""; position: absolute; inset: -40%;
+        background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.4), transparent 50%),
+                    radial-gradient(circle at 65% 80%, rgba(0, 255, 136, 0.25), transparent 50%);
+        filter: blur(16px);
+      }
+
+      .links { display: none; gap: 36px; }
+      @media (min-width: 860px) { .links { display: flex; } }
+      .links a { color: rgba(250, 250, 250, 0.5); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; transition: color 0.2s; }
+      .links a:hover { color: #fff; }
+
+      .btn {
+        display: inline-flex; align-items: center; gap: 10px;
+        border-radius: 14px; border: 1px solid rgba(255,255,255,0.08);
+        background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+        color: #fff; padding: 12px 24px; text-decoration: none;
+        font-size: 13px; font-weight: 700; transition: transform 0.2s, box-shadow 0.2s;
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      }
+      .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+
+      section { padding: 100px 0; }
+
+      .hero { display: grid; gap: 64px; grid-template-columns: 1fr; padding-top: 80px; }
+      @media (min-width: 960px) { .hero { grid-template-columns: 1.1fr 0.9fr; align-items: center; } }
+
+      .badge {
+        display: inline-flex; gap: 10px; align-items: center; padding: 8px 16px;
+        border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04); color: var(--green);
+        font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 24px;
+      }
+      .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--green); box-shadow: 0 0 12px var(--green); }
+
+      h1 { font-family: 'Syne', sans-serif; font-size: clamp(48px, 8vw, 88px); line-height: 0.92; letter-spacing: -0.05em; margin: 0 0 32px; font-weight: 800; }
+      .grad { background: linear-gradient(135deg, var(--purple), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
       
-      <div class="testimonials-grid">
-        <div class="testimonial">
-          <p class="testimonial-text">"Dual Frame transformed our social presence. Engagement up 340% in two months. They understand what actually performs."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SC</div>
-            <div>
-              <div class="testimonial-name">Sarah Chen</div>
-              <div class="testimonial-role">CMO, TechStart</div>
+      .sub { color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 540px; margin-bottom: 40px; }
+
+      .cta-group { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
+      .outline { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+
+      .hero-stats { display: flex; gap: 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+      .h-stat { display: flex; flex-direction: column; gap: 4px; }
+      .h-stat .v { font-size: 24px; font-weight: 800; color: #fff; }
+      .h-stat .l { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted2); }
+
+      .card {
+        position: relative; border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6); overflow: hidden; padding: 24px;
+      }
+      .img-box { width: 100%; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.4); overflow: hidden; position: relative; }
+      .img-box img { width: 100%; height: auto; display: block; }
+      .live-tag { position: absolute; bottom: 16px; left: 16px; right: 16px; background: rgba(0,0,0,0.6); padding: 12px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; }
+      .live-tag .t { font-size: 10px; font-weight: 800; color: #fff; letter-spacing: 0.1em; display: flex; align-items: center; gap: 8px; }
+      .live-tag .d { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+      .card-bottom { margin-top: 24px; padding: 0 4px; }
+      .bar-wrap { height: 6px; width: 100%; background: rgba(255,255,255,0.05); border-radius: 99px; margin-top: 12px; overflow: hidden; }
+      .bar { height: 100%; width: 92%; background: linear-gradient(90deg, var(--purple), var(--green)); border-radius: 99px; }
+
+      .section-label { font-size: 11px; font-weight: 800; letter-spacing: 0.3em; color: rgba(255,255,255,0.3); text-transform: uppercase; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+      .section-label::before { content: ""; width: 32px; height: 1px; background: var(--purple); opacity: 0.5; }
+      h2 { font-family: 'Syne', sans-serif; font-size: clamp(36px, 6vw, 56px); letter-spacing: -0.04em; margin: 0 0 56px; line-height: 1.1; font-weight: 800; }
+
+      .grid-box { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+      .item { padding: 40px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+      .item:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+      .item .icon { width: 56px; height: 56px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+      .item h3 { font-family: 'Syne', sans-serif; margin: 0 0 16px; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+      .item p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+      .contact-card { border-radius: 40px; padding: 48px; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); display: grid; gap: 48px; }
+      @media (min-width: 960px) { .contact-card { grid-template-columns: 1fr 1fr; align-items: center; } }
+      .form { display: grid; gap: 16px; }
+      .input { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 18px 24px; color: #fff; outline: none; transition: border 0.2s; font-family: inherit; }
+      .input:focus { border-color: rgba(255,255,255,0.2); }
+      .submit { width: 100%; padding: 20px; border-radius: 16px; border: none; background: #fff; color: #000; font-weight: 800; cursor: pointer; transition: transform 0.2s; font-family: inherit; }
+      .submit:hover { transform: translateY(-2px); }
+
+      .footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0; margin-top: 80px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; color: rgba(255,255,255,0.3); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrap noise">
+      <div class="grid"></div>
+
+      <nav class="nav">
+        <div class="container nav-inner">
+          <a class="brand" href="#">
+            <div class="brand-dot"></div>
+            DualFrameCreative
+          </a>
+          <div class="links">
+            <a href="#services">Services</a>
+            <a href="#approach">Approach</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <a class="btn" href="#contact">Start a project</a>
+        </div>
+      </nav>
+
+      <main class="container">
+        <section class="hero">
+          <div>
+            <div class="badge"><div class="dot"></div> Performance Creative Studio</div>
+            <h1>Stop scrolls. <br><span class="grad">Capture demand.</span></h1>
+            <p class="sub">We build high-converting short-form systems for modern brands. From viral UGC to premium performance ads, we bridge the gap between human storytelling and AI-speed.</p>
+            <div class="cta-group">
+              <a class="btn" href="#contact">Book your audit</a>
+              <a class="btn outline" href="#work">View Case Studies</a>
+            </div>
+            <div class="hero-stats">
+              <div class="h-stat"><div class="v">$4.2M+</div><div class="l">Spend Managed</div></div>
+              <div class="h-stat"><div class="v">185%</div><div class="l">Avg ROAS Lift</div></div>
+              <div class="h-stat"><div class="v">48hr</div><div class="l">Turnaround</div></div>
             </div>
           </div>
-        </div>
-        
-        <div class="testimonial">
-          <p class="testimonial-text">"They got our vision immediately. No endless revisions, no miscommunication. Just excellent work, delivered fast."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">MW</div>
-            <div>
-              <div class="testimonial-name">Marcus Webb</div>
-              <div class="testimonial-role">Founder, SpeedFit</div>
+
+          <div class="card">
+            <div class="img-box">
+              <img src="dualframecreative-logo.png" alt="DualFrameCreative logo" />
+              <div class="live-tag">
+                <div class="t"><div class="d"></div> LIVE PERFORMANCE MONITORING</div>
+                <div class="t" style="opacity:0.5; font-family:monospace;">0.04S LATENCY</div>
+              </div>
+            </div>
+            <div class="card-bottom">
+              <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:800; color:rgba(255,255,255,0.5);">
+                <span>CONTENT SATURATION</span>
+                <span style="color:var(--green)">98.4%</span>
+              </div>
+              <div class="bar-wrap"><div class="bar"></div></div>
             </div>
           </div>
-        </div>
-        
-        <div class="testimonial">
-          <p class="testimonial-text">"Working with them feels like having an elite in-house team. Pure creative excellence with real business impact."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">ER</div>
-            <div>
-              <div class="testimonial-name">Elena Rossi</div>
-              <div class="testimonial-role">Brand Director, Luxe</div>
+        </section>
+
+        <section id="services">
+          <div class="section-label">Expertise</div>
+          <h2>Creative that <span class="grad">scales accounts.</span></h2>
+          <div class="grid-box">
+            <div class="item">
+              <div class="icon">🎯</div>
+              <h3>Direct Response Ads</h3>
+              <p>High-impact hooks and psychological triggers designed to lower CAC and drive immediate sales growth.</p>
+            </div>
+            <div class="item">
+              <h3>Native Short-Form</h3>
+              <p>TikTok and IG-first content that feels authentic while maintaining professional brand polish.</p>
+            </div>
+            <div class="item">
+              <h3>Motion Identity</h3>
+              <p>Dynamic graphic systems that make your brand feel alive, premium, and impossible to ignore.</p>
+            </div>
+            <div class="item">
+              <h3>Creator Strategy</h3>
+              <p>End-to-end UGC management from briefing talent to final performance-led editing and testing.</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
 
-  <section id="faq">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">FAQ</div>
-        <h2 class="display">Questions</h2>
-      </div>
-      
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question">
-            <h3>What makes Dual Frame different?</h3>
-            <div class="faq-toggle">+</div>
+        <section id="contact">
+          <div class="contact-card">
+            <div>
+              <div class="section-label">Contact</div>
+              <h2 style="margin-bottom:24px;">Ready to <span class="grad">outpace?</span></h2>
+              <p style="color:var(--muted); margin-bottom:40px;">Stop settling for average creative. Let's build a performance engine that makes your brand the only choice.</p>
+              <div style="display:grid; gap:20px;">
+                <div style="display:flex; align-items:center; gap:16px;">
+                  <div style="width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center;">✉️</div>
+                  <div>
+                    <div style="font-size:9px; font-weight:800; color:rgba(255,255,255,0.3); letter-spacing:0.1em;">DIRECT EMAIL</div>
+                    <div style="font-weight:700;">hello@dualframecreative.com</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form class="form" onsubmit="event.preventDefault()">
+              <input class="input" placeholder="Full Name" />
+              <input class="input" placeholder="Email Address" />
+              <textarea class="input" placeholder="Tell us about your creative bottlenecks..." style="min-height:120px;"></textarea>
+              <button class="submit">Secure Consultation</button>
+            </form>
           </div>
-          <div class="faq-answer">
-            <p>We blend human creativity with AI efficiency. Every piece is hand-crafted by our team, then enhanced with cutting-edge tools for maximum impact. The result: premium quality at unprecedented speed.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <h3>What's your typical turnaround?</h3>
-            <div class="faq-toggle">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>Most projects are delivered within 5-7 business days. Rush delivery available for urgent campaigns. We move fast without cutting corners.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <h3>Do you work with startups?</h3>
-            <div class="faq-toggle">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>Absolutely. We have flexible packages designed for brands at every stage. Some of our best work has been with early-stage companies ready to make noise.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <h3>Which platforms do you specialize in?</h3>
-            <div class="faq-toggle">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>TikTok, Instagram Reels, YouTube Shorts, LinkedIn, and emerging platforms. We stay ahead of algorithm changes and platform trends so you don't have to.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
 
-  <section class="cta" id="contact">
-    <div class="container">
-      <div class="cta-inner">
-        <div class="label" style="justify-content: center; margin-bottom: 20px;">Let's create</div>
-        <h2 class="display">Ready to stand out?</h2>
-        <p>Let's talk about your next project. We're always excited to meet ambitious brands.</p>
-        <div class="hero-actions" style="justify-content: center;">
-          <button class="btn btn-primary">hello@dualframe.co</button>
-          <button class="btn btn-ghost">Book a call</button>
-        </div>
-      </div>
+        <footer class="footer">
+          <div>DualFrameCreative • Performance Studio</div>
+          <div style="display:flex; gap:24px;">
+            <a href="#" style="color:inherit; text-decoration:none;">Instagram</a>
+            <a href="#" style="color:inherit; text-decoration:none;">Twitter</a>
+            <a href="#" style="color:inherit; text-decoration:none;">LinkedIn</a>
+          </div>
+          <div>© 2026 DUALFRAME. ALL RIGHTS RESERVED.</div>
+        </footer>
+      </main>
     </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <a href="#" class="logo">
-          <div class="logo-mark"></div>
-          <span class="logo-text">Dual Frame</span>
-        </a>
-        <div class="footer-links">
-          <a href="#">Twitter</a>
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
-        </div>
-        <div class="footer-copy">© 2025 Dual Frame Creative</div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-    
-    // FAQ accordion
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
-      });
-    });
-    
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
-</body>
+  </body>
 </html>
