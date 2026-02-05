@@ -3,46 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DualFrameCreative | Performance Ads Studio</title>
+    <title>Dual Frame Creative</title>
     <meta
       name="description"
-      content="Stop scrolls. Capture demand. DualFrameCreative engineers high-converting short-form ad systems for modern brands."
+      content="Dual Frame Creative is a content marketing studio helping modern brands turn attention into momentum—through strategy, short-form video, and execution built to compound."
     />
 
-    <meta property="og:title" content="DualFrameCreative" />
+    <meta property="og:title" content="Dual Frame Creative" />
     <meta
       property="og:description"
-      content="High-converting ad systems. Human grit meets AI speed."
+      content="Content that doesn't just look good. It performs. Strategy, short-form video, and execution built to compound."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://replit.com/public/images/opengraph.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@replit" />
+    <meta name="twitter:title" content="Dual Frame Creative" />
+    <meta
+      name="twitter:description"
+      content="Content that doesn't just look good. It performs. Strategy, short-form video, and execution built to compound."
+    />
 
     <style>
       :root {
         --bg: #09090b;
-        --bg2: #0b0b12;
+        --bg2: #0b0b10;
         --text: #fafafa;
         --muted: rgba(250, 250, 250, 0.6);
-        --muted2: rgba(250, 250, 250, 0.4);
+        --muted2: rgba(250, 250, 250, 0.42);
         --border: rgba(255, 255, 255, 0.08);
-        --glass: rgba(255, 255, 255, 0.08);
+        --glass: rgba(255, 255, 255, 0.06);
         --glass2: rgba(255, 255, 255, 0.03);
         --purple: #8b5cf6;
         --green: #00ff88;
       }
 
-      * { box-sizing: border-box; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; color-scheme: dark; }
 
       body {
-        margin: 0;
-        background: radial-gradient(circle at 15% 10%, rgba(139, 92, 246, 0.15), transparent 55%),
-                    radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.08), transparent 55%),
+        background: radial-gradient(circle at 15% 10%, rgba(139, 92, 246, 0.18), transparent 55%),
+                    radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.1), transparent 55%),
                     linear-gradient(180deg, var(--bg), var(--bg2));
+        background-attachment: fixed;
         color: var(--text);
-        font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
       }
@@ -50,36 +53,36 @@
       .wrap { position: relative; overflow: hidden; min-height: 100svh; }
       
       .grid {
-        position: absolute; inset: 0;
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        position: fixed; inset: 0;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
         background-size: 56px 56px;
         mask-image: radial-gradient(circle at 30% 15%, black 0%, transparent 60%);
-        opacity: 0.4; pointer-events: none;
+        opacity: 0.55; pointer-events: none; z-index: 0;
       }
 
       .noise::before {
-        content: ""; pointer-events: none; position: absolute; inset: 0;
+        content: ""; pointer-events: none; position: fixed; inset: 0; z-index: 1;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-        mix-blend-mode: overlay; opacity: 0.3;
+        mix-blend-mode: overlay; opacity: 0.35;
       }
 
-      .container { max-width: 1024px; margin: 0 auto; padding: 0 24px; position: relative; }
+      .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
 
+      /* ========== NAV ========== */
       .nav {
         position: sticky; top: 0; z-index: 100;
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        background: rgba(9, 9, 11, 0.7);
-        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        background: rgba(9, 9, 11, 0.45);
+        backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
       }
 
-      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
 
       .brand {
         display: flex; align-items: center; gap: 12px;
         text-decoration: none; color: var(--text);
-        font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px;
-        letter-spacing: -0.02em;
+        font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px;
       }
 
       .brand-dot {
@@ -90,202 +93,508 @@
 
       .brand-dot::after {
         content: ""; position: absolute; inset: -40%;
-        background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.4), transparent 50%),
-                    radial-gradient(circle at 65% 80%, rgba(0, 255, 136, 0.25), transparent 50%);
-        filter: blur(16px);
+        background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.45), transparent 50%),
+                    radial-gradient(circle at 65% 80%, rgba(0, 255, 136, 0.3), transparent 50%);
+        filter: blur(18px);
       }
 
       .links { display: none; gap: 32px; }
       @media (min-width: 860px) { .links { display: flex; } }
-      .links a { color: rgba(250, 250, 250, 0.5); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.2s; }
+      .links a { color: rgba(250, 250, 250, 0.65); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
       .links a:hover { color: #fff; }
 
       .btn {
-        display: inline-flex; align-items: center; gap: 10px;
-        border-radius: 14px; border: 1px solid rgba(255,255,255,0.08);
+        display: inline-flex; align-items: center; gap: 8px;
+        border-radius: 12px; border: 1px solid rgba(255,255,255,0.12);
         background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
         color: #fff; padding: 10px 20px; text-decoration: none;
-        font-size: 13px; font-weight: 700; transition: transform 0.2s, box-shadow 0.2s;
-        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        font-size: 13px; font-weight: 600; transition: all 0.25s ease;
+        backdrop-filter: blur(8px); cursor: pointer;
       }
-      .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+      .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.2); }
+      
+      .btn-primary {
+        background: linear-gradient(135deg, var(--purple), #a855f7);
+        border-color: rgba(139, 92, 246, 0.5);
+      }
+      .btn-primary:hover { box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); }
 
-      section { padding: 80px 0; }
+      .btn-outline { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.1); }
 
-      .hero { display: grid; gap: 64px; grid-template-columns: 1fr; padding-top: 60px; }
-      @media (min-width: 960px) { .hero { grid-template-columns: 1.1fr 0.9fr; align-items: center; } }
+      section { padding: 100px 0; position: relative; }
+
+      /* ========== HERO ========== */
+      .hero { display: grid; gap: 48px; grid-template-columns: 1fr; padding-top: 80px; padding-bottom: 120px; }
+      @media (min-width: 920px) { .hero { grid-template-columns: 1.15fr 0.85fr; align-items: center; } }
 
       .badge {
         display: inline-flex; gap: 10px; align-items: center; padding: 6px 14px;
         border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04); color: var(--green);
-        font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 24px;
+        background: rgba(255, 255, 255, 0.04); color: rgba(250, 250, 250, 0.7);
+        font-size: 11px; font-weight: 500; margin-bottom: 24px;
       }
-      .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--green); box-shadow: 0 0 12px var(--green); }
+      .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--green); box-shadow: 0 0 12px var(--green); animation: pulse 2s infinite; }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-      h1 { font-family: 'Syne', sans-serif; font-size: clamp(42px, 7vw, 76px); line-height: 0.94; letter-spacing: -0.05em; margin: 0 0 32px; font-weight: 800; }
+      h1 { font-family: 'Syne', sans-serif; font-size: clamp(40px, 6.5vw, 62px); line-height: 1.05; letter-spacing: -0.04em; margin: 0 0 24px; }
       .grad { background: linear-gradient(135deg, var(--purple), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
       
-      .sub { color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 500px; margin-bottom: 40px; }
+      .sub { color: var(--muted); font-size: 17px; line-height: 1.7; max-width: 520px; margin-bottom: 32px; }
+      .micro { color: var(--muted2); font-size: 12px; margin-top: 24px; }
 
-      .cta-group { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
-      .outline { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+      .cta-group { display: flex; flex-wrap: wrap; gap: 12px; }
 
-      .hero-stats { display: flex; gap: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); }
-      .h-stat { display: flex; flex-direction: column; gap: 4px; }
-      .h-stat .v { font-size: 22px; font-weight: 800; color: #fff; }
-      .h-stat .l { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted2); }
-
-      .card {
-        position: relative; border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.08);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
-        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6); overflow: hidden; padding: 20px;
+      .hero-card {
+        position: relative; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5); overflow: hidden; padding: 28px;
       }
-      .img-box { width: 100%; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.4); overflow: hidden; position: relative; }
-      .img-box img { width: 100%; height: auto; display: block; }
-      .live-tag { position: absolute; bottom: 12px; left: 12px; right: 12px; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 12px; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; }
-      .live-tag .t { font-size: 9px; font-weight: 800; color: #fff; letter-spacing: 0.1em; display: flex; align-items: center; gap: 8px; }
-      .live-tag .d { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
 
-      .card-bottom { margin-top: 20px; padding: 0 4px; }
-      .bar-wrap { height: 5px; width: 100%; background: rgba(255,255,255,0.05); border-radius: 99px; margin-top: 10px; overflow: hidden; }
-      .bar { height: 100%; width: 92%; background: linear-gradient(90deg, var(--purple), var(--green)); border-radius: 99px; }
+      .hero-card-inner {
+        border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.4); padding: 32px; text-align: center;
+      }
 
-      .section-label { font-size: 10px; font-weight: 800; letter-spacing: 0.3em; color: rgba(255,255,255,0.3); text-transform: uppercase; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-      .section-label::before { content: ""; width: 24px; height: 1px; background: var(--purple); opacity: 0.5; }
-      h2 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.04em; margin: 0 0 56px; line-height: 1.1; font-weight: 800; }
+      .hero-card-icon {
+        width: 64px; height: 64px; margin: 0 auto 20px; border-radius: 16px;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(0, 255, 136, 0.1));
+        border: 1px solid rgba(255,255,255,0.1);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 28px;
+      }
 
-      .grid-box { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-      .item { padding: 32px; border-radius: 28px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-      .item:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-      .item h3 { font-family: 'Syne', sans-serif; margin: 0 0 16px; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
-      .item p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+      .hero-card h3 { font-family: 'Syne', sans-serif; font-size: 18px; margin-bottom: 8px; }
+      .hero-card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
 
-      .contact-card { border-radius: 40px; padding: 40px; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); display: grid; gap: 40px; }
-      @media (min-width: 960px) { .contact-card { grid-template-columns: 1fr 1fr; align-items: center; } }
-      .form { display: grid; gap: 16px; }
-      .input { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 16px 20px; color: #fff; outline: none; transition: border 0.2s; font-family: inherit; font-size: 14px; }
-      .input:focus { border-color: rgba(255,255,255,0.2); }
-      .submit { width: 100%; padding: 18px; border-radius: 16px; border: none; background: #fff; color: #000; font-weight: 800; cursor: pointer; transition: transform 0.2s; font-family: inherit; font-size: 14px; }
-      .submit:hover { transform: translateY(-2px); }
+      .card-stats { margin-top: 20px; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+      .stat-pill { border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.03); padding: 16px 12px; text-align: center; }
+      .stat-pill .v { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; color: #fff; }
+      .stat-pill .l { font-size: 11px; color: rgba(250, 250, 250, 0.5); line-height: 1.4; margin-top: 4px; }
 
-      .footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0; margin-top: 80px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; color: rgba(255,255,255,0.3); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+      /* ========== SECTION HEADERS ========== */
+      .section-label { 
+        font-size: 11px; font-weight: 700; letter-spacing: 0.2em; 
+        color: rgba(255,255,255,0.4); text-transform: uppercase; 
+        display: flex; align-items: center; gap: 12px; margin-bottom: 16px; 
+      }
+      .section-label::before { content: ""; width: 24px; height: 1px; background: var(--purple); }
+      
+      h2 { font-family: 'Syne', sans-serif; font-size: clamp(30px, 5vw, 44px); letter-spacing: -0.03em; margin: 0 0 20px; line-height: 1.1; }
+      .section-sub { color: var(--muted); font-size: 16px; max-width: 560px; margin-bottom: 48px; }
+
+      /* ========== SERVICES SNAPSHOT ========== */
+      .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 32px; }
+      
+      .service-card { 
+        padding: 28px; border-radius: 20px; 
+        border: 1px solid rgba(255,255,255,0.08); 
+        background: rgba(255,255,255,0.02); 
+        transition: all 0.3s ease;
+        position: relative; overflow: hidden;
+      }
+      .service-card::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+        opacity: 0; transition: opacity 0.3s;
+      }
+      .service-card:hover { 
+        transform: translateY(-4px); 
+        border-color: rgba(255,255,255,0.15); 
+        background: rgba(255,255,255,0.04); 
+      }
+      .service-card:hover::before { opacity: 1; }
+      
+      .service-icon { 
+        width: 44px; height: 44px; border-radius: 12px; 
+        background: rgba(139, 92, 246, 0.1); 
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 16px; font-size: 20px;
+      }
+      
+      .service-card h3 { font-family: 'Syne', sans-serif; margin: 0 0 8px; font-size: 17px; }
+      .service-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+      .link-cta { 
+        display: inline-flex; align-items: center; gap: 8px;
+        color: var(--purple); font-size: 14px; font-weight: 600;
+        text-decoration: none; transition: gap 0.2s;
+      }
+      .link-cta:hover { gap: 12px; }
+      .link-cta svg { width: 16px; height: 16px; }
+
+      /* ========== WORK PREVIEW ========== */
+      .work-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 32px; }
+      
+      .work-card {
+        border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.02); overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .work-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+      
+      .work-thumb { 
+        aspect-ratio: 16/10; 
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 255, 136, 0.05));
+        display: flex; align-items: center; justify-content: center;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .work-thumb span { color: var(--muted2); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+      
+      .work-info { padding: 20px; }
+      .work-info h3 { font-family: 'Syne', sans-serif; font-size: 16px; margin: 0 0 6px; }
+      .work-info p { color: var(--muted); font-size: 13px; margin: 0; }
+      .work-result { 
+        display: inline-block; margin-top: 12px; padding: 6px 12px; 
+        border-radius: 8px; background: rgba(0, 255, 136, 0.1); 
+        color: var(--green); font-size: 12px; font-weight: 600;
+      }
+
+      /* ========== DIFFERENTIATOR ========== */
+      .diff-section { 
+        background: linear-gradient(180deg, rgba(139, 92, 246, 0.05), transparent);
+        border-top: 1px solid rgba(255,255,255,0.04);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .diff-grid { display: grid; gap: 40px; grid-template-columns: 1fr; margin-top: 48px; }
+      @media (min-width: 768px) { .diff-grid { grid-template-columns: 1fr 1fr; } }
+
+      .diff-text p { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 480px; }
+
+      .diff-points { display: flex; flex-direction: column; gap: 20px; }
+      .diff-point { 
+        display: flex; gap: 16px; align-items: flex-start;
+        padding: 20px; border-radius: 16px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+      .diff-point-icon { 
+        width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+        background: rgba(0, 255, 136, 0.1); 
+        display: flex; align-items: center; justify-content: center;
+        color: var(--green); font-size: 18px;
+      }
+      .diff-point h4 { font-family: 'Syne', sans-serif; font-size: 15px; margin: 0 0 4px; }
+      .diff-point p { color: var(--muted); font-size: 13px; margin: 0; }
+
+      /* ========== TESTIMONIALS ========== */
+      .testimonials-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 32px; }
+      
+      .testimonial-card {
+        padding: 28px; border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.02);
+      }
+      .testimonial-card blockquote { 
+        font-size: 15px; line-height: 1.7; color: var(--text); 
+        margin: 0 0 20px; font-style: italic;
+      }
+      .testimonial-card blockquote::before { content: """; color: var(--purple); font-size: 24px; }
+      .testimonial-author { display: flex; align-items: center; gap: 12px; }
+      .testimonial-avatar { 
+        width: 40px; height: 40px; border-radius: 10px; 
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(0, 255, 136, 0.2));
+      }
+      .testimonial-author strong { display: block; font-size: 14px; }
+      .testimonial-author span { color: var(--muted); font-size: 12px; }
+
+      /* ========== FINAL CTA ========== */
+      .final-cta {
+        text-align: center; padding: 100px 24px;
+        background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12), transparent 60%);
+      }
+      .final-cta h2 { margin-bottom: 16px; }
+      .final-cta .section-sub { margin: 0 auto 40px; text-align: center; }
+      .final-cta .cta-group { justify-content: center; }
+
+      /* ========== FOOTER ========== */
+      .footer { 
+        border-top: 1px solid rgba(255,255,255,0.06); 
+        padding: 60px 0 40px;
+      }
+      
+      .footer-top {
+        display: flex; flex-direction: column; gap: 32px;
+        padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.06);
+        margin-bottom: 24px;
+      }
+      @media (min-width: 640px) { 
+        .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; } 
+      }
+      
+      .footer-brand { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; }
+      .footer-brand span { display: block; color: var(--muted); font-size: 13px; font-weight: 400; margin-top: 8px; font-family: 'Inter', sans-serif; }
+      
+      .footer-nav { display: flex; flex-wrap: wrap; gap: 24px 32px; }
+      .footer-nav a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+      .footer-nav a:hover { color: #fff; }
+
+      .footer-bottom {
+        display: flex; flex-direction: column; gap: 16px;
+      }
+      @media (min-width: 640px) { 
+        .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } 
+      }
+      
+      .footer-copy { color: rgba(255,255,255,0.35); font-size: 12px; }
+
+      .footer-social { display: flex; gap: 12px; }
+      .social-link {
+        width: 38px; height: 38px; border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.03);
+        display: inline-flex; align-items: center; justify-content: center;
+        color: var(--muted); text-decoration: none;
+        transition: all 0.2s;
+      }
+      .social-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.2); }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="wrap noise">
       <div class="grid"></div>
 
+      <!-- ========== NAV ========== -->
       <nav class="nav">
         <div class="container nav-inner">
           <a class="brand" href="#">
             <div class="brand-dot"></div>
-            DualFrameCreative
+            Dual Frame Creative
           </a>
           <div class="links">
-            <a href="#services">Services</a>
-            <a href="#approach">Approach</a>
-            <a href="#work">Work</a>
-            <a href="#contact">Contact</a>
+            <a href="work.html">Work</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="testimonials.html">Testimonials</a>
+            <a href="contact.html">Contact</a>
           </div>
-          <a class="btn" href="#contact">Start a project</a>
+          <a class="btn btn-primary" href="contact.html">Book a Call</a>
         </div>
       </nav>
 
-      <main class="container">
-        <section class="hero">
+      <main>
+        <!-- ========== HERO ========== -->
+        <section class="hero container">
           <div>
-            <div class="badge"><div class="dot"></div> Performance Creative Studio</div>
-            <h1>Stop scrolls. <br><span class="grad">Capture demand.</span></h1>
-            <p class="sub">We build high-converting short-form systems for modern brands. From viral UGC to premium performance ads, we bridge the gap between human storytelling and AI-speed.</p>
+            <div class="badge"><div class="dot"></div> Content marketing studio</div>
+            <h1>Content that doesn't just look good. <span class="grad">It performs.</span></h1>
+            <p class="sub">Dual Frame Creative is a content marketing studio helping modern brands turn attention into momentum—through strategy, short-form video, and execution built to compound.</p>
             <div class="cta-group">
-              <a class="btn" href="#contact">Book your audit</a>
-              <a class="btn outline" href="#work">View Case Studies</a>
+              <a class="btn btn-primary" href="contact.html">Book a Call</a>
+              <a class="btn btn-outline" href="work.html">View Work</a>
             </div>
-            <div class="hero-stats">
-              <div class="h-stat"><div class="v">$4.2M+</div><div class="l">Spend Managed</div></div>
-              <div class="h-stat"><div class="v">185%</div><div class="l">Avg ROAS Lift</div></div>
-              <div class="h-stat"><div class="v">48hr</div><div class="l">Turnaround</div></div>
-            </div>
+            <p class="micro">Built for founders, creators, and brands who want results—not noise.</p>
           </div>
 
-          <div class="card">
-            <div class="img-box">
-              <img src="dualframecreative-logo.png" alt="DualFrameCreative logo" />
-              <div class="live-tag">
-                <div class="t"><div class="d"></div> LIVE PERFORMANCE MONITORING</div>
-                <div class="t" style="opacity:0.5; font-family:monospace;">0.04S LATENCY</div>
-              </div>
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="hero-card-icon">⚡</div>
+              <h3>Strategy + Execution</h3>
+              <p>Content systems that look premium, move fast, and compound over time.</p>
             </div>
-            <div class="card-bottom">
-              <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:800; color:rgba(255,255,255,0.5);">
-                <span>CONTENT SATURATION</span>
-                <span style="color:var(--green)">98.4%</span>
-              </div>
-              <div class="bar-wrap"><div class="bar"></div></div>
+            <div class="card-stats">
+              <div class="stat-pill"><div class="v">7–14 days</div><div class="l">Launch-ready sprints</div></div>
+              <div class="stat-pill"><div class="v">Weekly</div><div class="l">Performance iterations</div></div>
             </div>
           </div>
         </section>
 
-        <section id="services">
-          <div class="section-label">Expertise</div>
-          <h2>Creative that <span class="grad">scales accounts.</span></h2>
-          <div class="grid-box">
-            <div class="item">
-              <h3>Direct Response Ads</h3>
-              <p>High-impact hooks and psychological triggers designed to lower CAC and drive immediate sales growth.</p>
+        <!-- ========== SERVICES SNAPSHOT ========== -->
+        <section class="container" id="services-preview">
+          <div class="section-label">Services</div>
+          <h2>What we build</h2>
+          <p class="section-sub">A system approach to content—strategy, creation, and optimization working together.</p>
+          
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">📋</div>
+              <h3>Content Strategy</h3>
+              <p>Platform-specific planning and direction that makes execution easier.</p>
             </div>
-            <div class="item">
-              <h3>Native Short-Form</h3>
-              <p>TikTok and IG-first content that feels authentic while maintaining professional brand polish.</p>
+            <div class="service-card">
+              <div class="service-icon">🎬</div>
+              <h3>Content Creation</h3>
+              <p>Real + AI-assisted content, brand-safe and built for modern attention.</p>
             </div>
-            <div class="item">
-              <h3>Motion Identity</h3>
-              <p>Dynamic graphic systems that make your brand feel alive, premium, and impossible to ignore.</p>
+            <div class="service-card">
+              <div class="service-icon">📱</div>
+              <h3>Short-Form Video</h3>
+              <p>Editing optimized for retention, hooks, and conversion.</p>
             </div>
-            <div class="item">
-              <h3>Creator Strategy</h3>
-              <p>End-to-end UGC management from briefing talent to final performance-led editing and testing.</p>
+            <div class="service-card">
+              <div class="service-icon">📈</div>
+              <h3>Performance + Optimization</h3>
+              <p>Tracking what works, improving what doesn't, scaling what performs.</p>
             </div>
           </div>
+
+          <a class="link-cta" href="services.html">
+            Explore Services
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </section>
 
-        <section id="contact">
-          <div class="contact-card">
-            <div>
-              <div class="section-label">Contact</div>
-              <h2 style="margin-bottom:24px;">Ready to <span class="grad">outpace?</span></h2>
-              <p style="color:var(--muted); margin-bottom:40px;">Stop settling for average creative. Let's build a performance engine that makes your brand the only choice.</p>
-              <div style="display:grid; gap:20px;">
-                <div style="display:flex; align-items:center; gap:16px;">
-                  <div style="width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center;">✉️</div>
+        <!-- ========== WORK PREVIEW ========== -->
+        <section class="container" id="work-preview">
+          <div class="section-label">Work</div>
+          <h2>Work that speaks.</h2>
+          <p class="section-sub">A few recent builds across strategy, creative, and execution.</p>
+
+          <div class="work-grid">
+            <div class="work-card">
+              <div class="work-thumb"><span>Case Study</span></div>
+              <div class="work-info">
+                <h3>Brand Launch Campaign</h3>
+                <p>Strategy + short-form content system</p>
+                <div class="work-result">+340% engagement</div>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-thumb"><span>Case Study</span></div>
+              <div class="work-info">
+                <h3>Creator Content System</h3>
+                <p>Weekly content + performance optimization</p>
+                <div class="work-result">2.1M views in 90 days</div>
+              </div>
+            </div>
+            <div class="work-card">
+              <div class="work-thumb"><span>Case Study</span></div>
+              <div class="work-info">
+                <h3>DTC Growth Sprint</h3>
+                <p>Paid creative + organic strategy</p>
+                <div class="work-result">4.2x ROAS</div>
+              </div>
+            </div>
+          </div>
+
+          <a class="link-cta" href="work.html">
+            View Client Work
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </section>
+
+        <!-- ========== DIFFERENTIATOR ========== -->
+        <section class="diff-section">
+          <div class="container">
+            <div class="section-label">Our POV</div>
+            <h2>Your content shouldn't depend on <span class="grad">motivation</span>.</h2>
+            
+            <div class="diff-grid">
+              <div class="diff-text">
+                <p>Most brands don't have a content problem—they have a system problem. Dual Frame builds content that looks premium, moves fast, and compounds over time.</p>
+              </div>
+              <div class="diff-points">
+                <div class="diff-point">
+                  <div class="diff-point-icon">◎</div>
                   <div>
-                    <div style="font-size:9px; font-weight:800; color:rgba(255,255,255,0.3); letter-spacing:0.1em;">DIRECT EMAIL</div>
-                    <div style="font-weight:700;">hello@dualframecreative.com</div>
+                    <h4>Strategy-first</h4>
+                    <p>Every post has a job. No filler, no fluff.</p>
+                  </div>
+                </div>
+                <div class="diff-point">
+                  <div class="diff-point-icon">⚡</div>
+                  <div>
+                    <h4>Built for speed</h4>
+                    <p>Output without chaos. Systems that scale.</p>
+                  </div>
+                </div>
+                <div class="diff-point">
+                  <div class="diff-point-icon">↗</div>
+                  <div>
+                    <h4>Designed to convert</h4>
+                    <p>Attention is step one. Action is the goal.</p>
                   </div>
                 </div>
               </div>
             </div>
-            <form class="form" onsubmit="event.preventDefault()">
-              <input class="input" placeholder="Full Name" />
-              <input class="input" placeholder="Email Address" />
-              <textarea class="input" placeholder="Tell us about your creative bottlenecks..." style="min-height:120px;"></textarea>
-              <button class="submit">Secure Consultation</button>
-            </form>
           </div>
         </section>
 
-        <footer class="footer">
-          <div>DualFrameCreative • Performance Studio</div>
-          <div style="display:flex; gap:24px;">
-            <a href="#" style="color:inherit; text-decoration:none;">Instagram</a>
-            <a href="#" style="color:inherit; text-decoration:none;">Twitter</a>
-            <a href="#" style="color:inherit; text-decoration:none;">LinkedIn</a>
+        <!-- ========== TESTIMONIALS PREVIEW ========== -->
+        <section class="container" id="testimonials-preview">
+          <div class="section-label">Testimonials</div>
+          <h2>What clients say</h2>
+          <p class="section-sub">Fast communication. Clean execution. Strategy that actually shows up in the work.</p>
+
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <blockquote>They turned our scattered content ideas into a system that actually works. The results speak for themselves.</blockquote>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar"></div>
+                <div>
+                  <strong>Alex Chen</strong>
+                  <span>Founder, Nexus Labs</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <blockquote>Finally, a team that gets modern content. Fast, strategic, and zero hand-holding required.</blockquote>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar"></div>
+                <div>
+                  <strong>Maya Rodriguez</strong>
+                  <span>Marketing Director, Bloom</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <blockquote>Our engagement tripled in 60 days. The system they built keeps compounding month over month.</blockquote>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar"></div>
+                <div>
+                  <strong>Jordan Park</strong>
+                  <span>Creator, 500K+ followers</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>© 2026 DUALFRAME. ALL RIGHTS RESERVED.</div>
+
+          <a class="link-cta" href="testimonials.html">
+            Read more
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </section>
+
+        <!-- ========== FINAL CTA ========== -->
+        <section class="final-cta">
+          <div class="container">
+            <div class="section-label" style="justify-content: center;">Let's talk</div>
+            <h2>Ready to build content that <span class="grad">performs</span>?</h2>
+            <p class="section-sub">If you're serious about growth, we'll build the system behind it.</p>
+            <div class="cta-group">
+              <a class="btn btn-primary" href="contact.html">Book a Call</a>
+              <a class="btn btn-outline" href="mailto:hello@dualframecreative.com">Email Us</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer container">
+          <div class="footer-top">
+            <div class="footer-brand">
+              Dual Frame Creative
+              <span>hello@dualframecreative.com</span>
+            </div>
+            <nav class="footer-nav">
+              <a href="work.html">Work</a>
+              <a href="services.html">Services</a>
+              <a href="about.html">About</a>
+              <a href="testimonials.html">Testimonials</a>
+              <a href="contact.html">Contact</a>
+            </nav>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-copy">© 2026 Dual Frame Creative. All rights reserved.</div>
+            <div class="footer-social">
+              <a class="social-link" href="https://instagram.com/dualframecreative" target="_blank" aria-label="Instagram">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+            </div>
+          </div>
         </footer>
       </main>
     </div>
