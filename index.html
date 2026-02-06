@@ -50,7 +50,7 @@
         -webkit-font-smoothing: antialiased;
       }
 
-      .wrap { position: relative; overflow: hidden; min-height: 100svh; }
+      .wrap { position: relative; overflow: clip; min-height: 100svh; }
       
       .grid {
         position: fixed; inset: 0;
@@ -290,7 +290,7 @@
         font-size: 15px; line-height: 1.7; color: var(--text); 
         margin: 0 0 20px; font-style: italic;
       }
-      .testimonial-card blockquote::before { content: """; color: var(--purple); font-size: 24px; }
+      .testimonial-card blockquote::before { content: "\201C"; color: var(--purple); font-size: 24px; }
       .testimonial-author { display: flex; align-items: center; gap: 12px; }
       .testimonial-avatar { 
         width: 40px; height: 40px; border-radius: 10px; 
