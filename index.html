@@ -150,26 +150,19 @@
       }
       @media (min-width: 860px) {
         .hero-glow {
-          top: 50%; bottom: auto; transform: translate(-50%, -50%);
+          top: 50%; left: auto; right: 0; transform: translateY(-50%);
           width: 500px; height: 500px;
         }
       }
 
       .hero-layout {
         position: relative; z-index: 2;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
         padding: 160px 28px 36px;
-        min-height: inherit;
-        align-content: center;
       }
       @media (min-width: 860px) {
         .hero-layout {
-          grid-template-columns: 1fr 1fr;
-          gap: 0;
-          padding: 48px 44px;
-          align-items: center;
+          padding: 56px 44px;
+          max-width: 55%;
         }
       }
 
@@ -230,18 +223,15 @@
       /* Animated orb */
       .hero-orb-wrap {
         position: absolute;
-        top: -40px; left: 50%; transform: translateX(-50%);
+        top: -30px; left: 50%; transform: translateX(-50%);
         pointer-events: none;
         opacity: 0.5;
         z-index: 1;
       }
       @media (min-width: 860px) {
         .hero-orb-wrap {
-          position: relative;
-          top: auto; left: auto; transform: none;
-          display: flex; align-items: center; justify-content: center;
-          padding: 0;
-          pointer-events: auto;
+          top: 50%; left: auto; right: 8%;
+          transform: translateY(-50%);
           opacity: 1;
         }
       }
@@ -509,9 +499,17 @@
           <div class="hero-streaks"></div>
           <div class="hero-glow"></div>
 
+          <!-- Orb — positioned against hero-card -->
+          <div class="hero-orb-wrap fade-in d3">
+            <div class="orb">
+              <div class="orb-ring"></div>
+              <div class="orb-ring-2"></div>
+              <div class="orb-core"></div>
+            </div>
+          </div>
+
           <div class="hero-layout">
 
-            <!-- Left — Text -->
             <div class="hero-text">
               <div class="hero-badge fade-in d1">
                 <div class="hero-badge-dot"></div>
@@ -524,16 +522,6 @@
                 <a class="btn btn-ghost" href="work.html">View Work</a>
               </div>
               <p class="hero-note fade-in d5">Built for founders, creators, and brands who want results.</p>
-
-            </div>
-
-            <!-- Orb -->
-            <div class="hero-orb-wrap fade-in d3">
-              <div class="orb">
-                <div class="orb-ring"></div>
-                <div class="orb-ring-2"></div>
-                <div class="orb-core"></div>
-              </div>
             </div>
 
           </div>
