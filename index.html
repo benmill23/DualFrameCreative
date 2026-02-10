@@ -238,83 +238,26 @@
         margin-top: 20px; font-size: 11px; color: var(--muted2);
       }
 
-      /* ===== ORB: HIDDEN ON MOBILE (CHANGED) ===== */
-      .hero-orb-wrap {
+      /* ===== DESKTOP LOGO (REPLACES ORB) ===== */
+      .hero-logo-desktop-wrap {
         display: none;
-        pointer-events: none;
       }
       @media (min-width: 860px) {
-        .hero-orb-wrap {
+        .hero-logo-desktop-wrap {
           display: flex;
           align-items: center; justify-content: center;
           padding: 0;
-          pointer-events: auto;
-          opacity: 1;
           position: relative;
         }
       }
-
-      .orb {
-        width: 180px; height: 180px;
-        position: relative;
-        animation: orbFloat 6s ease-in-out infinite;
-      }
-      @media (min-width: 860px) { .orb { width: 300px; height: 300px; } }
-
-      @keyframes orbFloat {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-12px); }
+      .hero-logo-desktop {
+        max-width: 320px;
+        height: auto;
       }
 
-      .orb-ring {
-        position: absolute; inset: 0;
-        border-radius: 50%;
-        border: 1.5px solid rgba(139, 92, 246, 0.25);
-        animation: orbSpin 12s linear infinite;
-      }
-      .orb-ring::before {
-        content: "";
-        position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
-        width: 8px; height: 8px; border-radius: 50%;
-        background: var(--purple);
-        box-shadow: 0 0 12px var(--purple), 0 0 24px rgba(139,92,246,0.3);
-      }
-      @keyframes orbSpin { to { transform: rotate(360deg); } }
 
-      .orb-ring-2 {
-        position: absolute; inset: 15px;
-        border-radius: 50%;
-        border: 1px solid rgba(0, 255, 136, 0.12);
-        animation: orbSpin 8s linear infinite reverse;
-      }
-      .orb-ring-2::before {
-        content: "";
-        position: absolute; bottom: -2px; right: 20%;
-        width: 5px; height: 5px; border-radius: 50%;
-        background: var(--green);
-        box-shadow: 0 0 8px var(--green);
-      }
 
-      .orb-core {
-        position: absolute; inset: 35px;
-        border-radius: 50%;
-        background: radial-gradient(circle,
-          rgba(139, 92, 246, 0.25) 0%,
-          rgba(139, 92, 246, 0.08) 50%,
-          transparent 70%
-        );
-        animation: orbPulse 4s ease-in-out infinite;
-      }
-      .orb-core::after {
-        content: "";
-        position: absolute; inset: 20%;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-      }
-      @keyframes orbPulse {
-        0%, 100% { opacity: 0.7; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.08); }
-      }
+
 
 
 
@@ -543,13 +486,13 @@
 
             </div>
 
-            <!-- Orb (desktop only now) -->
-            <div class="hero-orb-wrap fade-in d3">
-              <div class="orb">
-                <div class="orb-ring"></div>
-                <div class="orb-ring-2"></div>
-                <div class="orb-core"></div>
-              </div>
+            <!-- Desktop Logo (replaces orb) -->
+            <div class="hero-logo-desktop-wrap fade-in d3">
+              <img
+                class="hero-logo-desktop"
+                src="vaith_logo.PNG"
+                alt="Dual Frame Creative"
+              />
             </div>
 
           </div>
