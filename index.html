@@ -166,7 +166,7 @@
       }
       @media (min-width: 860px) {
         .hero-layout {
-          grid-template-columns: 1fr auto 1fr;
+          grid-template-columns: 1fr 1fr;
           gap: 0;
           padding: 48px 44px;
           align-items: center;
@@ -227,7 +227,7 @@
         margin-top: 20px; font-size: 11px; color: var(--muted2);
       }
 
-      /* Center — animated orb */
+      /* Animated orb */
       .hero-orb-wrap {
         position: absolute;
         bottom: -20px; left: 50%; transform: translateX(-50%);
@@ -240,7 +240,7 @@
           position: relative;
           bottom: auto; left: auto; transform: none;
           display: flex; align-items: center; justify-content: center;
-          padding: 0 40px;
+          padding: 0;
           pointer-events: auto;
           opacity: 1;
         }
@@ -251,7 +251,7 @@
         position: relative;
         animation: orbFloat 6s ease-in-out infinite;
       }
-      @media (min-width: 768px) { .orb { width: 220px; height: 220px; } }
+      @media (min-width: 860px) { .orb { width: 300px; height: 300px; } }
 
       @keyframes orbFloat {
         0%, 100% { transform: translateY(0); }
@@ -308,20 +308,6 @@
         50% { opacity: 1; transform: scale(1.08); }
       }
 
-      /* Right column — stats */
-      .hero-stats {
-        display: none;
-      }
-      @media (min-width: 860px) {
-        .hero-stats {
-          display: flex;
-          flex-direction: column; gap: 24px;
-          justify-content: center;
-          padding-left: 32px;
-          border-left: 1px solid var(--border);
-        }
-      }
-
       /* Mobile stats — compact inline version */
       .hero-stats-mobile {
         display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap;
@@ -336,14 +322,6 @@
       }
       .stat-tag strong {
         color: var(--text); font-weight: 600;
-      }
-
-      .hero-stat-value {
-        font-family: var(--serif); font-size: clamp(22px, 3vw, 32px);
-        font-weight: 400; letter-spacing: -0.02em; line-height: 1.1;
-      }
-      .hero-stat-label {
-        font-size: 11px; color: var(--muted2); line-height: 1.4; margin-top: 2px;
       }
 
       /* ========== SECTION SHARED ========== */
@@ -567,28 +545,12 @@
               </div>
             </div>
 
-            <!-- Center — Orb -->
+            <!-- Orb -->
             <div class="hero-orb-wrap fade-in d3">
               <div class="orb">
                 <div class="orb-ring"></div>
                 <div class="orb-ring-2"></div>
                 <div class="orb-core"></div>
-              </div>
-            </div>
-
-            <!-- Right — Stats -->
-            <div class="hero-stats fade-in d4">
-              <div class="hero-stat">
-                <div class="hero-stat-value">7&ndash;14</div>
-                <div class="hero-stat-label">day launch<br>sprints</div>
-              </div>
-              <div class="hero-stat">
-                <div class="hero-stat-value">340%</div>
-                <div class="hero-stat-label">avg. engagement<br>increase</div>
-              </div>
-              <div class="hero-stat">
-                <div class="hero-stat-value">4.2x</div>
-                <div class="hero-stat-label">average client<br>ROAS</div>
               </div>
             </div>
 
