@@ -160,7 +160,7 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 0;
-        padding: 160px 28px 36px;
+        padding: 48px 28px 36px;
         min-height: inherit;
         align-content: center;
       }
@@ -190,6 +190,17 @@
         animation: pulse 2.5s ease infinite;
       }
       @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+      /* ===== MOBILE LOGO (NEW) ===== */
+      .hero-logo-mobile {
+        display: block;
+        margin: 0 auto 28px;
+        max-width: 160px;
+        height: auto;
+      }
+      @media (min-width: 860px) {
+        .hero-logo-mobile { display: none; }
+      }
 
       .hero-text h1 {
         font-family: var(--serif); font-weight: 400;
@@ -227,22 +238,19 @@
         margin-top: 20px; font-size: 11px; color: var(--muted2);
       }
 
-      /* Animated orb */
+      /* ===== ORB: HIDDEN ON MOBILE (CHANGED) ===== */
       .hero-orb-wrap {
-        position: absolute;
-        top: -40px; left: 50%; transform: translateX(-50%);
+        display: none;
         pointer-events: none;
-        opacity: 0.5;
-        z-index: 1;
       }
       @media (min-width: 860px) {
         .hero-orb-wrap {
-          position: relative;
-          top: auto; left: auto; transform: none;
-          display: flex; align-items: center; justify-content: center;
+          display: flex;
+          align-items: center; justify-content: center;
           padding: 0;
           pointer-events: auto;
           opacity: 1;
+          position: relative;
         }
       }
 
@@ -517,6 +525,14 @@
                 <div class="hero-badge-dot"></div>
                 Content marketing studio
               </div>
+
+              <!-- MOBILE LOGO — swap src with your actual logo -->
+              <img
+                class="hero-logo-mobile fade-in d2"
+                src="logo.png"
+                alt="Dual Frame Creative"
+              />
+
               <h1 class="fade-in d2">Content that doesn't just look good.<br><em>It performs.</em></h1>
               <p class="hero-desc fade-in d3">Strategy, short-form video, and execution built to compound. We help modern brands turn attention into momentum.</p>
               <div class="hero-actions fade-in d4">
@@ -527,7 +543,7 @@
 
             </div>
 
-            <!-- Orb -->
+            <!-- Orb (desktop only now) -->
             <div class="hero-orb-wrap fade-in d3">
               <div class="orb">
                 <div class="orb-ring"></div>
