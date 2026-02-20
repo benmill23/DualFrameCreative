@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Work — Dual Frame Creative</title>
-    <meta name="description" content="See the work. Strategy, short-form video, and execution that drives real results." />
+    <meta name="description" content="See the work. Real clients, real results. Strategy, short-form video, and execution that drives measurable growth." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -37,8 +37,6 @@
       .fade-in.d4 { animation-delay: 0.4s; }
       .fade-in.d5 { animation-delay: 0.5s; }
       .fade-in.d6 { animation-delay: 0.6s; }
-      .fade-in.d7 { animation-delay: 0.7s; }
-      .fade-in.d8 { animation-delay: 0.8s; }
       @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
       /* NAV */
@@ -46,7 +44,7 @@
       @media (min-width: 768px) { .nav { padding: 14px 24px 0; } }
       .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; max-width: 720px; margin: 0 auto; border-radius: 100px; border: 1px solid var(--border); background: rgba(9, 9, 11, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
       .brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 15px; color: var(--text); letter-spacing: -0.01em; }
-      .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(0, 255, 136, 0.15)); border: 1px solid rgba(255,255,255,0.08); }
+      .brand-mark { width: 30px; height: 30px; border-radius: 8px; object-fit: contain; }
       .nav-links { display: none; gap: 28px; }
       @media (min-width: 768px) { .nav-links { display: flex; } }
       .nav-links a { color: var(--muted); font-size: 13px; font-weight: 500; transition: color 0.2s; }
@@ -63,28 +61,156 @@
       .section-desc { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 480px; margin-bottom: 48px; }
       .grad-text { font-family: var(--serif); font-style: italic; background: linear-gradient(135deg, var(--purple), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-      /* WORK GRID */
-      .work-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-bottom: 80px; }
-      @media (min-width: 640px) { .work-grid { grid-template-columns: 1fr 1fr; } }
+      /* ========== CLIENT CASE STUDY CARDS ========== */
+      .client-card {
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        overflow: hidden;
+        margin-bottom: 32px;
+        transition: border-color 0.3s ease;
+      }
+      .client-card:hover { border-color: var(--border-hover); }
 
-      .work-card { border-radius: 16px; border: 1px solid var(--border); background: var(--surface); overflow: hidden; transition: all 0.3s ease; }
-      .work-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-      .work-card.featured { grid-column: 1 / -1; }
-      @media (min-width: 640px) { .work-card.featured { display: grid; grid-template-columns: 1fr 1fr; } }
+      .client-header {
+        padding: 36px 32px 28px;
+        border-bottom: 1px solid var(--border);
+      }
+      .client-meta {
+        display: flex; align-items: center; gap: 10px;
+        margin-bottom: 16px;
+      }
+      .client-industry {
+        padding: 4px 12px; border-radius: 100px;
+        font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: var(--purple-soft); color: var(--purple);
+      }
+      .client-header h3 {
+        font-family: var(--serif); font-weight: 400;
+        font-size: 28px; margin-bottom: 8px;
+      }
+      .client-goal {
+        color: var(--muted); font-size: 15px; line-height: 1.7;
+        max-width: 600px;
+      }
+      .client-goal-tag {
+        margin-top: 10px;
+        font-size: 15px; font-weight: 700;
+        color: var(--text);
+      }
 
-      .work-visual { aspect-ratio: 16/10; background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(0,255,136,0.03)); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); }
-      .work-card.featured .work-visual { aspect-ratio: auto; min-height: 280px; border-bottom: none; border-right: 1px solid var(--border); }
-      @media (max-width: 639px) { .work-card.featured .work-visual { aspect-ratio: 16/10; border-right: none; border-bottom: 1px solid var(--border); } }
-      .work-visual span { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted2); }
+      /* VIDEO GALLERY */
+      .video-gallery {
+        padding: 28px 32px;
+        border-bottom: 1px solid var(--border);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .video-row {
+        display: flex; gap: 16px;
+        min-width: min-content;
+      }
+      .video-item {
+        flex-shrink: 0;
+        display: flex; flex-direction: column; gap: 10px;
+      }
+      .video-thumb {
+        position: relative;
+        width: 220px; height: 391px;
+        border-radius: 12px; border: 1px solid var(--border);
+        background: var(--surface2);
+        overflow: hidden;
+        display: block;
+        transition: border-color 0.2s;
+      }
+      .video-thumb:hover { border-color: var(--border-hover); }
+      .video-thumb img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+      }
+      .play-overlay {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(0,0,0,0.25);
+        transition: background 0.2s;
+      }
+      .video-thumb:hover .play-overlay { background: rgba(0,0,0,0.1); }
+      .play-btn {
+        width: 52px; height: 52px;
+        background: rgba(255,255,255,0.92);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        transition: transform 0.2s;
+      }
+      .video-thumb:hover .play-btn { transform: scale(1.08); }
+      .play-btn svg { margin-left: 3px; }
+      @media (max-width: 639px) {
+        .video-thumb { width: 180px; height: 320px; }
+      }
+      .video-caption {
+        font-size: 12px; color: var(--muted); max-width: 220px;
+        line-height: 1.4;
+      }
+      @media (max-width: 639px) {
+        .video-caption { max-width: 180px; }
+      }
 
-      .work-body { padding: 24px; }
-      .work-card.featured .work-body { display: flex; flex-direction: column; justify-content: center; padding: 32px; }
-      .work-body h3 { font-family: var(--serif); font-size: 18px; font-weight: 400; margin-bottom: 6px; }
-      .work-card.featured .work-body h3 { font-size: 22px; }
-      .work-body p { color: var(--muted); font-size: 13px; margin-bottom: 14px; line-height: 1.6; }
-      .work-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-      .work-tag { padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 500; border: 1px solid var(--border); color: var(--muted); }
-      .work-metric { display: inline-block; padding: 4px 10px; border-radius: 6px; background: var(--green-soft); color: var(--green); font-size: 12px; font-weight: 600; }
+      /* RESULTS / METRICS */
+      .results-section {
+        padding: 28px 32px;
+      }
+      .results-label {
+        font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--muted2);
+        margin-bottom: 16px;
+      }
+      .results-grid {
+        display: grid; gap: 12px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 480px) { .results-grid { grid-template-columns: 1fr 1fr; } }
+      @media (min-width: 768px) { .results-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+      .result-card {
+        padding: 20px; border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--surface2);
+      }
+      .result-value {
+        font-family: var(--serif); font-size: 24px;
+        background: linear-gradient(135deg, var(--purple), var(--green));
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        margin-bottom: 4px;
+      }
+      .result-label {
+        color: var(--muted); font-size: 13px; line-height: 1.5;
+      }
+
+      .context-note {
+        margin-top: 16px;
+        padding: 16px 20px; border-radius: 12px;
+        background: var(--green-soft);
+        border: 1px solid rgba(0,255,136,0.1);
+      }
+      .context-note p {
+        color: rgba(0, 255, 136, 0.85); font-size: 13px; line-height: 1.6;
+      }
+
+      /* PLATFORM BREAKDOWN */
+      .platform-row {
+        display: flex; gap: 8px; flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .platform-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 5px 12px; border-radius: 8px;
+        background: var(--surface2); border: 1px solid var(--border);
+        font-size: 12px; font-weight: 600;
+      }
+      .platform-badge .platform-name { color: var(--muted); }
+      .platform-badge .platform-stat { color: var(--green); }
 
       /* CTA */
       .final-cta { text-align: center; position: relative; overflow: hidden; padding: 80px 0; }
@@ -98,8 +224,6 @@
       .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: 100px; font-size: 13px; font-weight: 600; font-family: var(--sans); cursor: pointer; transition: all 0.25s ease; border: none; }
       .btn-primary { background: var(--purple); color: #fff; }
       .btn-primary:hover { box-shadow: 0 0 24px rgba(139,92,246,0.3); transform: translateY(-1px); }
-      .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-      .btn-ghost:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.03); }
       .btn-arrow { font-size: 14px; transition: transform 0.2s; }
       .btn:hover .btn-arrow { transform: translateX(2px); }
 
@@ -117,13 +241,12 @@
       .footer-copy { color: var(--muted2); font-size: 11px; }
       .social-link { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--muted); transition: all 0.2s; }
       .social-link:hover { border-color: var(--border-hover); color: var(--text); }
-      .divider { height: 1px; background: var(--border); margin: 0; border: none; }
     </style>
   </head>
   <body>
     <nav class="nav">
       <div class="nav-inner">
-        <a class="brand" href="index.html"><div class="brand-mark"></div>Dual Frame</a>
+        <a class="brand" href="index.html"><img class="brand-mark" src="logo_png_2.png" alt="Dual Frame Creative">Dual Frame</a>
         <div class="nav-links">
           <a href="work.html" class="active">Work</a>
           <a href="services.html">Services</a>
@@ -142,89 +265,223 @@
           <p class="section-desc fade-in d2">Every project starts with strategy and ends with numbers that matter. Here's a look at what we've built.</p>
         </div>
 
-        <div class="work-grid">
-          <div class="work-card featured fade-in d3">
-            <div class="work-visual"><span>Featured Case Study</span></div>
-            <div class="work-body">
-              <h3>Brand Launch Campaign</h3>
-              <p>Full content system for a DTC skincare brand entering market. Strategy, 90-day content calendar, and short-form video production across TikTok and Instagram.</p>
-              <div class="work-tags">
-                <span class="work-tag">Strategy</span>
-                <span class="work-tag">Short-Form</span>
-                <span class="work-tag">TikTok</span>
+        <!-- ========== HLTHi ========== -->
+        <div class="client-card fade-in d3">
+          <div class="client-header">
+            <div class="client-meta">
+              <span class="client-industry">Healthcare</span>
+            </div>
+            <h3>HLTHi</h3>
+            <p class="client-goal">Organic short-form content strategy for a telehealth company. Consistent, platform-native video built to drive awareness and early conversions — with zero paid spend.</p>
+          </div>
+
+          <div class="video-gallery">
+            <div class="video-row">
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/UDmhPwpA6v4" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/UDmhPwpA6v4/hqdefault.jpg" alt="HLTHi content sample 1" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">AI-generated brand awareness video</span>
               </div>
-              <div class="work-metric">+340% engagement</div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/Oq8B4BGlFHk" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/Oq8B4BGlFHk/hqdefault.jpg" alt="HLTHi content sample 2" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Platform-native short-form content</span>
+              </div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/9QDUzuhbE8A" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/9QDUzuhbE8A/hqdefault.jpg" alt="HLTHi content sample 3" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Organic telehealth awareness content</span>
+              </div>
             </div>
           </div>
 
-          <div class="work-card fade-in d4">
-            <div class="work-visual"><span>Case Study</span></div>
-            <div class="work-body">
-              <h3>Creator Content System</h3>
-              <p>Weekly content pipeline and performance optimization for a lifestyle creator.</p>
-              <div class="work-tags">
-                <span class="work-tag">Content System</span>
-                <span class="work-tag">Optimization</span>
+          <div class="results-section">
+            <div class="results-label">Results</div>
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">~17k</div>
+                <div class="result-label">Organic video views in 6 weeks — zero paid spend</div>
               </div>
-              <div class="work-metric">2.1M views in 90 days</div>
+              <div class="result-card">
+                <div class="result-value">+226%</div>
+                <div class="result-label">Organic video views on Instagram (month-over-month)</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">+155%</div>
+                <div class="result-label">Organic video views on Facebook (month-over-month)</div>
+              </div>
             </div>
-          </div>
 
-          <div class="work-card fade-in d5">
-            <div class="work-visual"><span>Case Study</span></div>
-            <div class="work-body">
-              <h3>DTC Growth Sprint</h3>
-              <p>Paid creative and organic strategy for a supplement brand scaling revenue.</p>
-              <div class="work-tags">
-                <span class="work-tag">Paid Creative</span>
-                <span class="work-tag">Organic</span>
-              </div>
-              <div class="work-metric">4.2x ROAS</div>
+            <div class="context-note" style="margin-top: 16px;">
+              <p><strong>Early conversion signal:</strong> 1 new patient sign-up attributed to Instagram content (DM) — within the first week of strategy deployment.</p>
             </div>
-          </div>
-
-          <div class="work-card fade-in d6">
-            <div class="work-visual"><span>Case Study</span></div>
-            <div class="work-body">
-              <h3>SaaS Content Engine</h3>
-              <p>Content strategy and LinkedIn presence for a B2B fintech startup.</p>
-              <div class="work-tags">
-                <span class="work-tag">LinkedIn</span>
-                <span class="work-tag">B2B</span>
-              </div>
-              <div class="work-metric">+180% inbound leads</div>
-            </div>
-          </div>
-
-          <div class="work-card fade-in d7">
-            <div class="work-visual"><span>Case Study</span></div>
-            <div class="work-body">
-              <h3>E-commerce Rebrand</h3>
-              <p>Visual identity refresh and content overhaul for a fashion e-commerce brand.</p>
-              <div class="work-tags">
-                <span class="work-tag">Rebrand</span>
-                <span class="work-tag">E-commerce</span>
-              </div>
-              <div class="work-metric">+92% click-through rate</div>
-            </div>
-          </div>
-
-          <div class="work-card featured fade-in d8">
-            <div class="work-visual"><span>Featured Case Study</span></div>
-            <div class="work-body">
-              <h3>Fitness Creator Scale-Up</h3>
-              <p>Took a fitness creator from 50K to 300K followers in 6 months with a systemized content approach. Short-form video, hooks framework, and weekly performance reviews driving consistent growth.</p>
-              <div class="work-tags">
-                <span class="work-tag">Creator</span>
-                <span class="work-tag">Short-Form</span>
-                <span class="work-tag">Growth</span>
-              </div>
-              <div class="work-metric">6x follower growth</div>
+            <div class="context-note" style="margin-top: 8px;">
+              <p>Benchmarked against early-stage organic accounts, this reflects above-average early traction given the short time frame, zero paid spend, and minimal starting audience.</p>
             </div>
           </div>
         </div>
+
+        <!-- ========== TIPLY ========== -->
+        <div class="client-card fade-in d4">
+          <div class="client-header">
+            <div class="client-meta">
+              <span class="client-industry">Music Software</span>
+            </div>
+            <h3>Tiply</h3>
+            <p class="client-goal">Brand launch and lead-gen.</p>
+            <div class="client-goal-tag">Goal: New artist sign-ups</div>
+          </div>
+
+          <div class="video-gallery">
+            <div class="video-row">
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/vumfPkUYZEU" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/vumfPkUYZEU/hqdefault.jpg" alt="Tiply — Broadway video" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">The one on Broadway</span>
+              </div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/GPRsS2ZNd7I" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/GPRsS2ZNd7I/hqdefault.jpg" alt="Tiply — Artist street interview" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Artist street interview — two artists</span>
+              </div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/fw9wHec1QK4" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/fw9wHec1QK4/hqdefault.jpg" alt="Tiply — Founder interview" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Founder interview — on the couch</span>
+              </div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/R8BZqQbBuXk" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/R8BZqQbBuXk/hqdefault.jpg" alt="Tiply — Whiteboard video" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Whiteboard video (boosted)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-section">
+            <div class="results-label">Results — First Month</div>
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">~1k</div>
+                <div class="result-label">Unique visitors to the website</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">554</div>
+                <div class="result-label">New paying users on the platform</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">19</div>
+                <div class="result-label">New artist sign-ups that connected their bank account and get paid through the platform</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== ALCHEMY STUDIOS ========== -->
+        <div class="client-card fade-in d5">
+          <div class="client-header">
+            <div class="client-meta">
+              <span class="client-industry">Real Estate</span>
+            </div>
+            <h3>Alchemy Studios</h3>
+            <p class="client-goal">High-performing social-media-ready video content for promotional use.</p>
+            <div class="client-goal-tag">Goal: Increase volume of Airbnb guests and ultimately sell the property</div>
+          </div>
+
+          <div class="video-gallery">
+            <div class="video-row">
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/UDmhPwpA6v4" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/UDmhPwpA6v4/hqdefault.jpg" alt="Alchemy Studios — Property video 1" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Property showcase — Ubud, Bali</span>
+              </div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/Oq8B4BGlFHk" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/Oq8B4BGlFHk/hqdefault.jpg" alt="Alchemy Studios — Property video 2" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Promotional content — property listing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-section">
+            <div class="results-label">Results</div>
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="result-value">&#x2191; Bookings</div>
+                <div class="result-label">Increased Airbnb bookings while the property was still being rented by guests</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">&#x2191; Warm Leads</div>
+                <div class="result-label">Owner receiving more warm leads since promoting the property with the videos</div>
+              </div>
+              <div class="result-card">
+                <div class="result-value">For Sale</div>
+                <div class="result-label">Property now listed for sale — videos driving buyer interest from organic reach</div>
+              </div>
+            </div>
+
+            <div class="context-note" style="margin-top: 16px;">
+              <p>Created videos for a property owner in Ubud, Bali, Indonesia. The content served dual purposes — driving short-term Airbnb bookings and generating long-term buyer leads for the property sale.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
+      <!-- ========== CTA ========== -->
       <section class="final-cta">
         <div class="container">
           <div class="cta-orb"></div>
@@ -241,7 +498,7 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-inner">
-          <div class="footer-brand">Dual Frame Creative<span>[email&#160;protected]</span></div>
+          <div class="footer-brand">Dual Frame Creative<span>hello@dualframecreative.com</span></div>
           <div class="footer-links">
             <a href="work.html">Work</a>
             <a href="services.html">Services</a>
@@ -252,7 +509,7 @@
         </div>
         <div class="footer-bottom">
           <div class="footer-copy">&copy; 2026 Dual Frame Creative. All rights reserved.</div>
-          <a class="social-link" href="https://instagram.com/dualframecreative" target="_blank" aria-label="Instagram">
+          <a class="social-link" href="https://instagram.com/dual_frame_creative" target="_blank" aria-label="Instagram">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
         </div>
