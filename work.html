@@ -157,6 +157,23 @@
         .video-caption { max-width: 180px; }
       }
 
+      /* MOBILE SCROLL INDICATOR */
+      .scroll-hint {
+        display: none;
+        align-items: center; gap: 6px;
+        padding: 8px 32px 0;
+        font-size: 12px; color: var(--muted2);
+        animation: nudge 2s ease infinite;
+      }
+      .scroll-hint svg { flex-shrink: 0; }
+      @media (max-width: 639px) {
+        .scroll-hint { display: flex; }
+      }
+      @keyframes nudge {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(6px); }
+      }
+
       /* RESULTS / METRICS */
       .results-section {
         padding: 28px 32px;
@@ -312,6 +329,10 @@
               </div>
             </div>
           </div>
+          <div class="scroll-hint">
+            Swipe for more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
 
           <div class="results-section">
             <div class="results-label">Results</div>
@@ -353,50 +374,54 @@
           <div class="video-gallery">
             <div class="video-row">
               <div class="video-item">
-                <a class="video-thumb" href="https://youtube.com/shorts/vumfPkUYZEU" target="_blank" rel="noopener">
-                  <img src="https://img.youtube.com/vi/vumfPkUYZEU/hqdefault.jpg" alt="Tiply — Broadway video" loading="lazy">
+                <a class="video-thumb" href="https://youtube.com/shorts/R8BZqQbBuXk" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/R8BZqQbBuXk/hqdefault.jpg" alt="Tiply — Features Explainer" loading="lazy">
                   <div class="play-overlay">
                     <div class="play-btn">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
                     </div>
                   </div>
                 </a>
-                <span class="video-caption">The one on Broadway</span>
-              </div>
-              <div class="video-item">
-                <a class="video-thumb" href="https://youtube.com/shorts/GPRsS2ZNd7I" target="_blank" rel="noopener">
-                  <img src="https://img.youtube.com/vi/GPRsS2ZNd7I/hqdefault.jpg" alt="Tiply — Artist street interview" loading="lazy">
-                  <div class="play-overlay">
-                    <div class="play-btn">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
-                    </div>
-                  </div>
-                </a>
-                <span class="video-caption">Artist street interview — two artists</span>
+                <span class="video-caption">Features Explainer Video</span>
               </div>
               <div class="video-item">
                 <a class="video-thumb" href="https://youtube.com/shorts/fw9wHec1QK4" target="_blank" rel="noopener">
-                  <img src="https://img.youtube.com/vi/fw9wHec1QK4/hqdefault.jpg" alt="Tiply — Founder interview" loading="lazy">
+                  <img src="https://img.youtube.com/vi/fw9wHec1QK4/hqdefault.jpg" alt="Tiply — Founder Video" loading="lazy">
                   <div class="play-overlay">
                     <div class="play-btn">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
                     </div>
                   </div>
                 </a>
-                <span class="video-caption">Founder interview — on the couch</span>
+                <span class="video-caption">Founder Video: Brand Promise</span>
               </div>
               <div class="video-item">
-                <a class="video-thumb" href="https://youtube.com/shorts/R8BZqQbBuXk" target="_blank" rel="noopener">
-                  <img src="https://img.youtube.com/vi/R8BZqQbBuXk/hqdefault.jpg" alt="Tiply — Whiteboard video" loading="lazy">
+                <a class="video-thumb" href="https://youtube.com/shorts/vumfPkUYZEU" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/vumfPkUYZEU/hqdefault.jpg" alt="Tiply — Brand Launch" loading="lazy">
                   <div class="play-overlay">
                     <div class="play-btn">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
                     </div>
                   </div>
                 </a>
-                <span class="video-caption">Whiteboard video (boosted)</span>
+                <span class="video-caption">Brand Launch Video</span>
+              </div>
+              <div class="video-item">
+                <a class="video-thumb" href="https://youtube.com/shorts/GPRsS2ZNd7I" target="_blank" rel="noopener">
+                  <img src="https://img.youtube.com/vi/GPRsS2ZNd7I/hqdefault.jpg" alt="Tiply — Street Interviews" loading="lazy">
+                  <div class="play-overlay">
+                    <div class="play-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="#09090b"><polygon points="6,3 21,12 6,21"/></svg>
+                    </div>
+                  </div>
+                </a>
+                <span class="video-caption">Broadway Nashville Artist Street Interviews</span>
               </div>
             </div>
+          </div>
+          <div class="scroll-hint">
+            Swipe for more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
 
           <div class="results-section">
@@ -454,6 +479,10 @@
                 <span class="video-caption">Promotional content — property listing</span>
               </div>
             </div>
+          </div>
+          <div class="scroll-hint">
+            Swipe for more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
 
           <div class="results-section">
