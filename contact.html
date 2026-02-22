@@ -64,7 +64,8 @@
       .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--purple); }
       .form-group textarea { resize: vertical; min-height: 120px; }
       .form-group select { appearance: none; cursor: pointer; }
-      .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .form-row { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      @media (min-width: 480px) { .form-row { grid-template-columns: 1fr 1fr; } }
 
       .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 28px; border-radius: 100px; font-size: 14px; font-weight: 600; font-family: var(--sans); cursor: pointer; transition: all 0.25s ease; border: none; }
       .btn-primary { background: var(--purple); color: #fff; width: 100%; }
