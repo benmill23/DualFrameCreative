@@ -638,31 +638,31 @@
 
     <script>
       (function() {
-        var videos = document.querySelectorAll('.hero-video');
+        var desktopVideo = document.querySelector('.hero-video-desktop');
+        var mobileVideo = document.querySelector('.hero-video-mobile');
         var btn = document.getElementById('soundToggle');
-        if (!videos.length || !btn) return;
+        if (!btn) return;
 
-        // Try to play with sound first on visible video
-        videos.forEach(function(video) {
-          video.muted = false;
-          var playPromise = video.play();
-          if (playPromise !== undefined) {
-            playPromise.then(function() {
-              btn.classList.add('is-unmuted');
-            }).catch(function() {
-              video.muted = true;
-              video.play();
-              btn.classList.remove('is-unmuted');
-            });
-          }
-        });
+        function getVisibleVideo() {
+          if (window.innerWidth >= 768) return desktopVideo;
+          return mobileVideo;
+        }
+
+        // Pause the hidden video so it doesn't play audio
+        function syncVideos() {
+          var visible = getVisibleVideo();
+          var hidden = (visible === desktopVideo) ? mobileVideo : desktopVideo;
+          if (hidden) { hidden.pause(); hidden.muted = true; }
+          if (visible) { visible.muted = true; visible.play(); }
+        }
+        syncVideos();
+        window.addEventListener('resize', syncVideos);
 
         btn.addEventListener('click', function() {
-          var isMuted = videos[0].muted;
-          videos.forEach(function(video) {
-            video.muted = !isMuted;
-          });
-          btn.classList.toggle('is-unmuted', isMuted);
+          var video = getVisibleVideo();
+          if (!video) return;
+          video.muted = !video.muted;
+          btn.classList.toggle('is-unmuted', !video.muted);
         });
       })();
     </script>
