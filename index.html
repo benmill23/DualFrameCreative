@@ -75,9 +75,10 @@
 
       .brand {
         display: flex; align-items: center; gap: 10px;
-        font-family: var(--serif); font-size: 15px; color: var(--text);
-        letter-spacing: -0.01em;
+        font-family: var(--serif); font-size: 13px; color: var(--text);
+        letter-spacing: -0.01em; white-space: nowrap;
       }
+      @media (min-width: 768px) { .brand { font-size: 15px; } }
       .brand-mark {
         width: 30px; height: 30px; border-radius: 8px;
         object-fit: contain;
@@ -419,7 +420,7 @@
       <div class="nav-inner">
         <a class="brand" href="#">
           <img class="brand-mark" src="logo_png_2.png" alt="Dual Frame Creative">
-          Dual Frame
+          Dual Frame Creative
         </a>
         <div class="nav-links">
           <a href="work.html">Work</a>

@@ -30,7 +30,8 @@
       .nav { position: sticky; top: 0; z-index: 100; padding: 10px 16px 0; }
       @media (min-width: 768px) { .nav { padding: 14px 24px 0; } }
       .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; max-width: 720px; margin: 0 auto; border-radius: 100px; border: 1px solid var(--border); background: rgba(9, 9, 11, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-      .brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 15px; color: var(--text); letter-spacing: -0.01em; }
+      .brand { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 13px; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
+      @media (min-width: 768px) { .brand { font-size: 15px; } }
       .brand-mark { width: 30px; height: 30px; border-radius: 8px; object-fit: contain; }
       .nav-links { display: none; gap: 28px; }
       @media (min-width: 768px) { .nav-links { display: flex; } }
@@ -105,7 +106,7 @@
   <body>
     <nav class="nav">
       <div class="nav-inner">
-        <a class="brand" href="index.html"><img class="brand-mark" src="logo_png_2.png" alt="Dual Frame Creative">Dual Frame</a>
+        <a class="brand" href="index.html"><img class="brand-mark" src="logo_png_2.png" alt="Dual Frame Creative">Dual Frame Creative</a>
         <div class="nav-links">
           <a href="work.html">Work</a>
           <a href="services.html">Services</a>
