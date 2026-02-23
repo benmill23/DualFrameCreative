@@ -9,6 +9,10 @@
     <meta property="og:description" content="Content that doesn't just look good. It performs. Strategy, short-form video, and execution built to compound." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://www.dualframecreative.com/vaith_logo.PNG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dual Frame Creative" />
+    <meta name="twitter:description" content="Content that doesn't just look good. It performs." />
+    <meta name="twitter:image" content="https://www.dualframecreative.com/vaith_logo.PNG" />
     <link rel="icon" type="image/png" href="logo_png_2.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,6 +120,12 @@
         width: 100%; height: 100%;
         object-fit: cover;
         z-index: 0;
+      }
+      .hero-video-mobile { display: block; }
+      .hero-video-desktop { display: none; }
+      @media (min-width: 768px) {
+        .hero-video-mobile { display: none; }
+        .hero-video-desktop { display: block; }
       }
 
       .hero-overlay {
@@ -438,8 +448,12 @@
 
       <!-- ========== HERO ========== -->
       <section class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline>
+        <video class="hero-video hero-video-desktop" autoplay muted loop playsinline>
           <source src="DualFrame.MP4" type="video/mp4">
+        </video>
+        <video class="hero-video hero-video-mobile" autoplay muted loop playsinline>
+          <source src="DualFrameMobile.mov" type="video/quicktime">
+          <source src="DualFrameMobile.mov" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
 
@@ -624,28 +638,31 @@
 
     <script>
       (function() {
-        var video = document.querySelector('.hero-video');
+        var videos = document.querySelectorAll('.hero-video');
         var btn = document.getElementById('soundToggle');
-        if (!video || !btn) return;
+        if (!videos.length || !btn) return;
 
-        // Try to play with sound first
-        video.muted = false;
-        var playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.then(function() {
-            // Browser allowed autoplay with sound
-            btn.classList.add('is-unmuted');
-          }).catch(function() {
-            // Browser blocked sound — fall back to muted
-            video.muted = true;
-            video.play();
-            btn.classList.remove('is-unmuted');
-          });
-        }
+        // Try to play with sound first on visible video
+        videos.forEach(function(video) {
+          video.muted = false;
+          var playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.then(function() {
+              btn.classList.add('is-unmuted');
+            }).catch(function() {
+              video.muted = true;
+              video.play();
+              btn.classList.remove('is-unmuted');
+            });
+          }
+        });
 
         btn.addEventListener('click', function() {
-          video.muted = !video.muted;
-          btn.classList.toggle('is-unmuted', !video.muted);
+          var isMuted = videos[0].muted;
+          videos.forEach(function(video) {
+            video.muted = !isMuted;
+          });
+          btn.classList.toggle('is-unmuted', isMuted);
         });
       })();
     </script>
