@@ -648,21 +648,38 @@
           return mobileVideo;
         }
 
-        // Pause the hidden video so it doesn't play audio
+        // Ensure visible video autoplays muted, hidden video is paused
         function syncVideos() {
           var visible = getVisibleVideo();
           var hidden = (visible === desktopVideo) ? mobileVideo : desktopVideo;
           if (hidden) { hidden.pause(); hidden.muted = true; }
-          if (visible) { visible.muted = true; visible.play(); }
+          if (visible) {
+            visible.muted = true;
+            visible.setAttribute('muted', '');
+            var p = visible.play();
+            if (p && p.catch) p.catch(function(){});
+          }
+          btn.classList.remove('is-unmuted');
         }
+
+        // Run on load and after a short delay to handle mobile timing
         syncVideos();
+        setTimeout(syncVideos, 500);
         window.addEventListener('resize', syncVideos);
 
         btn.addEventListener('click', function() {
           var video = getVisibleVideo();
           if (!video) return;
-          video.muted = !video.muted;
-          btn.classList.toggle('is-unmuted', !video.muted);
+          if (video.paused) {
+            video.muted = true;
+            video.play().then(function() {
+              video.muted = false;
+              btn.classList.add('is-unmuted');
+            }).catch(function(){});
+          } else {
+            video.muted = !video.muted;
+            btn.classList.toggle('is-unmuted', !video.muted);
+          }
         });
       })();
     </script>
