@@ -1,0 +1,23 @@
+# Dual Frame Creative
+
+> Dual Frame Creative is a content marketing studio helping modern brands turn attention into momentum—through strategy, short-form video, and execution built to compound. Based in Nashville, TN.
+
+## Services
+
+- Content strategy and brand positioning
+- Short-form video production (TikTok, Instagram Reels, YouTube Shorts)
+- Content creation and execution systems
+- Performance optimization and analytics
+
+## Pages
+
+- [Home](https://dualframecreative.com/): Main landing page with overview of services and point of view on content marketing
+- [Services](https://dualframecreative.com/services.html): Strategy, short-form video, content creation, and performance optimization — a systems approach to content
+- [Work](https://dualframecreative.com/work.html): Portfolio of real clients and real results — strategy, short-form video, and execution that drives measurable growth
+- [About](https://dualframecreative.com/about.html): The story behind Dual Frame Creative — a content marketing studio built for modern brands who want results, not just reach
+- [Testimonials](https://dualframecreative.com/testimonials.html): Hear from the founders, creators, and brands we've worked with
+- [Contact](https://dualframecreative.com/contact.html): Book a call or get in touch to build a content system that performs
+
+## Optional
+
+- [Instagram](https://instagram.com/dual_frame_creative): Social media presence and portfolio samples

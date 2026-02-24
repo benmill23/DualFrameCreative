@@ -1,0 +1,11 @@
+# robots.txt for DualFrame Creative
+User-agent: *
+Allow: /
+
+# Block crawling of video/media files
+Disallow: /*.mp4$
+Disallow: /*.mov$
+Disallow: /*.MP4$
+
+# Sitemap
+# Sitemap: https://www.dualframecreative.com/sitemap.xml
