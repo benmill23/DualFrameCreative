@@ -329,11 +329,11 @@
 
       /* ========== POV ========== */
       .pov { border-top: 1px solid var(--border); }
-      .pov-grid { display: grid; gap: 48px; grid-template-columns: 1fr; margin-top: 48px; }
-      @media (min-width: 768px) { .pov-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+      .pov-grid { display: flex; flex-direction: column; gap: 48px; margin-top: 48px; }
 
-      .pov-text { color: var(--muted); font-size: 16px; line-height: 1.8; }
-      .pov-items { display: flex; flex-direction: column; gap: 16px; }
+      .pov-text { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 620px; }
+      .pov-items { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      @media (min-width: 768px) { .pov-items { grid-template-columns: 1fr 1fr 1fr; } }
 
       .pov-item {
         display: flex; gap: 16px; align-items: flex-start;
