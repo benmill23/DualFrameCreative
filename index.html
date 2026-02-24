@@ -113,6 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background: radial-gradient(ellipse at 50% 40%, #1a1a2e 0%, #09090b 70%);
       }
 
       .hero-video {
@@ -448,10 +449,10 @@
 
       <!-- ========== HERO ========== -->
       <section class="hero-section">
-        <video class="hero-video hero-video-desktop" autoplay muted loop playsinline preload="auto">
+        <video class="hero-video hero-video-desktop" muted loop playsinline preload="auto">
           <source src="DualFrame.mp4" type="video/mp4">
         </video>
-        <video class="hero-video hero-video-mobile" autoplay muted loop playsinline preload="auto">
+        <video class="hero-video hero-video-mobile" muted loop playsinline preload="auto">
           <source src="DualFrameMobile.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -636,7 +637,7 @@
     </footer>
 
     <script>
-      (function() {
+      document.addEventListener('DOMContentLoaded', function() {
         var desktopVideo = document.querySelector('.hero-video-desktop');
         var mobileVideo = document.querySelector('.hero-video-mobile');
         var btn = document.getElementById('soundToggle');
@@ -647,7 +648,7 @@
           return mobileVideo;
         }
 
-        // Ensure visible video autoplays muted, hidden video is paused
+        // Ensure only the visible video plays muted, hidden video is paused
         function syncVideos() {
           var visible = getVisibleVideo();
           var hidden = (visible === desktopVideo) ? mobileVideo : desktopVideo;
@@ -661,7 +662,7 @@
           btn.classList.remove('is-unmuted');
         }
 
-        // Run on load and after a short delay to handle mobile timing
+        // Start playback on load and retry after short delay for mobile timing
         syncVideos();
         setTimeout(syncVideos, 500);
         window.addEventListener('resize', syncVideos);
@@ -680,7 +681,7 @@
             btn.classList.toggle('is-unmuted', !video.muted);
           }
         });
-      })();
+      });
     </script>
 
   </body>
