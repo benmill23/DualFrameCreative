@@ -96,6 +96,10 @@
       .response-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); flex-shrink: 0; animation: pulse 2.5s ease infinite; }
       @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+      .form-success { display: none; padding: 28px; border-radius: 16px; border: 1px solid rgba(0,255,136,0.15); background: var(--green-soft); text-align: center; }
+      .form-success p { color: var(--green); font-size: 15px; font-weight: 600; }
+      .form-success.visible { display: block; }
+
       .footer { border-top: 1px solid var(--border); padding: 48px 0 36px; }
       .footer-inner { display: flex; flex-direction: column; gap: 32px; }
       @media (min-width: 640px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
@@ -134,24 +138,28 @@
         </div>
 
         <div class="contact-grid">
-          <div class="contact-form fade-in d3">
+          <form class="contact-form fade-in d3" id="contact-form" action="https://formsubmit.co/hello@dualframecreative.com" method="POST">
+            <input type="hidden" name="_subject" value="New Contact — Dual Frame Creative">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://www.dualframecreative.com/contact.html?submitted=true">
+            <input type="text" name="_honey" style="display:none">
             <div class="form-row">
               <div class="form-group">
                 <label>Name</label>
-                <input type="text" placeholder="Your name">
+                <input type="text" name="name" placeholder="Your name" required>
               </div>
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" placeholder="you@company.com">
+                <input type="email" name="email" placeholder="you@company.com" required>
               </div>
             </div>
             <div class="form-group">
               <label>Company / Brand</label>
-              <input type="text" placeholder="Your brand or company name">
+              <input type="text" name="company" placeholder="Your brand or company name">
             </div>
             <div class="form-group">
               <label>What are you looking for?</label>
-              <select>
+              <select name="service" required>
                 <option value="" disabled selected>Select a service</option>
                 <option>Content Strategy</option>
                 <option>Content Creation</option>
@@ -163,9 +171,12 @@
             </div>
             <div class="form-group">
               <label>Tell us more</label>
-              <textarea placeholder="What are your goals? Where are you now? What does success look like?"></textarea>
+              <textarea name="message" placeholder="What are your goals? Where are you now? What does success look like?"></textarea>
             </div>
-            <button class="btn btn-primary" type="button">Send Message <span class="btn-arrow">&rarr;</span></button>
+            <button class="btn btn-primary" type="submit">Send Message <span class="btn-arrow">&rarr;</span></button>
+          </form>
+          <div class="form-success" id="form-success">
+            <p>Message sent! We'll get back to you within 24 hours.</p>
           </div>
 
           <div class="contact-info fade-in d4">
@@ -212,5 +223,14 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      if (window.location.search.includes('submitted=true')) {
+        var form = document.getElementById('contact-form');
+        var msg = document.getElementById('form-success');
+        form.style.display = 'none';
+        msg.classList.add('visible');
+      }
+    </script>
   </body>
 </html>
