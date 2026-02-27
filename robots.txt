@@ -8,4 +8,4 @@ Disallow: /*.mov$
 Disallow: /*.MP4$
 
 # Sitemap
-# Sitemap: https://www.dualframecreative.com/sitemap.xml
+Sitemap: https://www.dualframecreative.com/sitemap.xml
