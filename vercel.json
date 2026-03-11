@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "dualframecreative.com"
+        }
+      ],
+      "destination": "https://www.dualframecreative.com/:path*",
+      "permanent": true
+    }
+  ]
+}
