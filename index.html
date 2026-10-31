@@ -47,677 +47,247 @@
       ]
     }
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-    <style>
-      :root {
-        --bg: #09090b;
-        --surface: #0f0f13;
-        --surface2: #141419;
-        --text: #f0f0f2;
-        --muted: rgba(240, 240, 242, 0.55);
-        --muted2: rgba(240, 240, 242, 0.3);
-        --border: rgba(255, 255, 255, 0.06);
-        --border-hover: rgba(255, 255, 255, 0.12);
-        --purple: #8b5cf6;
-        --purple-soft: rgba(139, 92, 246, 0.15);
-        --green: #00ff88;
-        --green-soft: rgba(0, 255, 136, 0.08);
-        --serif: 'DM Serif Display', Georgia, serif;
-        --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-      }
-
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; color-scheme: dark; }
-
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: var(--sans);
-        font-weight: 400;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
-      }
-
-      .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-      a { text-decoration: none; color: inherit; }
-
-      .fade-in { opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards; }
-      .fade-in.d1 { animation-delay: 0.1s; }
-      .fade-in.d2 { animation-delay: 0.2s; }
-      .fade-in.d3 { animation-delay: 0.3s; }
-      .fade-in.d4 { animation-delay: 0.4s; }
-      .fade-in.d5 { animation-delay: 0.5s; }
-      .fade-in.d6 { animation-delay: 0.6s; }
-      @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-      /* ========== NAV ========== */
-      .nav {
-        position: sticky; top: 0; z-index: 100;
-        padding: 10px 16px 0;
-      }
-      @media (min-width: 768px) { .nav { padding: 14px 24px 0; } }
-
-      .nav-inner {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 10px 20px;
-        max-width: 720px; margin: 0 auto;
-        border-radius: 100px;
-        border: 1px solid var(--border);
-        background: rgba(9, 9, 11, 0.7);
-        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      }
-
-      .brand {
-        display: flex; align-items: center; gap: 10px;
-        font-family: var(--serif); font-size: 13px; color: var(--text);
-        letter-spacing: -0.01em; white-space: nowrap;
-      }
-      @media (min-width: 768px) { .brand { font-size: 15px; } }
-      .brand-mark {
-        width: 30px; height: 30px; border-radius: 8px;
-        object-fit: contain;
-      }
-
-      .nav-links { display: none; gap: 28px; }
-      @media (min-width: 768px) { .nav-links { display: flex; } }
-      .nav-links a { color: var(--muted); font-size: 13px; font-weight: 500; transition: color 0.2s; }
-      .nav-links a:hover { color: var(--text); }
-
-      .nav-cta {
-        padding: 7px 18px; border-radius: 100px;
-        background: var(--purple); color: #fff;
-        font-size: 12px; font-weight: 600;
-        transition: all 0.2s; border: none; cursor: pointer;
-        white-space: nowrap;
-      }
-      .nav-cta:hover { box-shadow: 0 0 20px rgba(139, 92, 246, 0.35); }
-
-      /* ========== HERO ========== */
-      .hero-section {
-        padding: 0;
-        position: relative;
-        overflow: hidden;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: radial-gradient(ellipse at 50% 40%, #1a1a2e 0%, #09090b 70%);
-      }
-
-      .hero-video {
-        position: absolute; top: 0; left: 0;
-        width: 100%; height: 100%;
-        object-fit: cover;
-        z-index: 0;
-      }
-      .hero-video-mobile { display: block; }
-      .hero-video-desktop { display: none; }
-      @media (min-width: 768px) {
-        .hero-video-mobile { display: none; }
-        .hero-video-desktop { display: block; }
-      }
-
-      .hero-overlay {
-        position: absolute; top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: linear-gradient(
-          180deg,
-          rgba(9,9,11,0.4) 0%,
-          rgba(9,9,11,0.6) 50%,
-          rgba(9,9,11,0.85) 100%
-        );
-        z-index: 1;
-        pointer-events: none;
-      }
-
-      .hero-content {
-        position: relative; z-index: 2;
-        text-align: center;
-        padding: 120px 24px 80px;
-        max-width: 700px;
-      }
-
-      .sound-toggle {
-        position: absolute; bottom: 28px; right: 28px;
-        z-index: 10; width: 44px; height: 44px;
-        border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
-        background: rgba(9,9,11,0.6); backdrop-filter: blur(12px);
-        cursor: pointer; display: flex; align-items: center; justify-content: center;
-        transition: all 0.25s ease;
-        color: var(--muted);
-      }
-      .sound-toggle:hover {
-        background: rgba(9,9,11,0.8); border-color: rgba(255,255,255,0.25);
-        color: var(--text);
-      }
-      .sound-toggle svg { width: 20px; height: 20px; fill: currentColor; }
-      .sound-toggle .icon-unmuted { display: none; }
-      .sound-toggle.is-unmuted .icon-muted { display: none; }
-      .sound-toggle.is-unmuted .icon-unmuted { display: block; }
-
-      /* Left column — text */
-      .hero-text { z-index: 2; position: relative; }
-
-      .hero-badge {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 5px 14px 5px 10px; border-radius: 100px;
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,0.03);
-        font-size: 11px; color: var(--muted); font-weight: 500;
-        margin-bottom: 24px;
-      }
-      .hero-badge-dot {
-        width: 6px; height: 6px; border-radius: 50%;
-        background: var(--green); box-shadow: 0 0 8px var(--green);
-        animation: pulse 2.5s ease infinite;
-      }
-      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-      /* ===== MOBILE LOGO (NEW) ===== */
-      .hero-logo-mobile {
-        display: block;
-        margin: 0 auto 28px;
-        max-width: 280px;
-        height: auto;
-      }
-      @media (min-width: 860px) {
-        .hero-logo-mobile { display: none; }
-      }
-
-      .hero-text h1 {
-        font-family: var(--serif); font-weight: 400;
-        font-size: clamp(32px, 5vw, 48px);
-        line-height: 1.1; letter-spacing: -0.03em;
-        margin-bottom: 16px;
-      }
-      .hero-text h1 em,
-      .hero-content h1 em {
-        font-style: italic;
-        background: linear-gradient(135deg, var(--purple), var(--green));
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-      }
-
-      .hero-desc {
-        color: var(--muted); font-size: 14px; line-height: 1.7;
-        max-width: 340px; margin-bottom: 28px;
-      }
-
-      .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-      .btn {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 11px 24px; border-radius: 100px;
-        font-size: 13px; font-weight: 600; font-family: var(--sans);
-        cursor: pointer; transition: all 0.25s ease; border: none;
-      }
-      .btn-primary { background: var(--purple); color: #fff; }
-      .btn-primary:hover { box-shadow: 0 0 24px rgba(139,92,246,0.3); transform: translateY(-1px); }
-      .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-      .btn-ghost:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.03); }
-      .btn-arrow { font-size: 14px; transition: transform 0.2s; }
-      .btn:hover .btn-arrow { transform: translateX(2px); }
-
-      .hero-note {
-        margin-top: 20px; font-size: 11px; color: var(--muted2);
-      }
-
-      /* ===== DESKTOP LOGO (REPLACES ORB) ===== */
-      .hero-logo-desktop-wrap {
-        display: none;
-      }
-      @media (min-width: 860px) {
-        .hero-logo-desktop-wrap {
-          display: flex;
-          align-items: center; justify-content: center;
-          padding: 0;
-          position: relative;
-        }
-      }
-      .hero-logo-desktop {
-        max-width: 500px;
-        height: auto;
-      }
-
-
-
-
-
-
-
-      /* ========== SECTION SHARED ========== */
-      section { padding: 80px 0; }
-      @media (min-width: 768px) { section { padding: 120px 0; } }
-
-      .section-tag {
-        font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
-        text-transform: uppercase; color: var(--purple); margin-bottom: 16px;
-      }
-      .section-tag.center { text-align: center; }
-
-      .section-title {
-        font-family: var(--serif); font-weight: 400;
-        font-size: clamp(28px, 4.5vw, 42px);
-        letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px;
-      }
-      .section-title.center { text-align: center; }
-
-      .section-desc {
-        color: var(--muted); font-size: 15px; line-height: 1.7;
-        max-width: 480px; margin-bottom: 48px;
-      }
-      .section-desc.center { text-align: center; margin-left: auto; margin-right: auto; }
-
-      /* ========== SERVICES — BENTO ========== */
-      .bento { display: grid; gap: 12px; grid-template-columns: 1fr; }
-      @media (min-width: 640px) { .bento { grid-template-columns: 1fr 1fr; } }
-      @media (min-width: 860px) { .bento { grid-template-columns: 1fr 1fr 1fr 1fr; } }
-
-      .bento-card {
-        padding: 28px; border-radius: 16px;
-        border: 1px solid var(--border); background: var(--surface);
-        transition: all 0.3s ease; position: relative; overflow: hidden;
-      }
-      .bento-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-      @media (min-width: 860px) { .bento-card.wide { grid-column: span 2; } }
-
-      .bento-icon {
-        width: 40px; height: 40px; border-radius: 10px;
-        background: var(--purple-soft);
-        display: flex; align-items: center; justify-content: center;
-        margin-bottom: 20px; font-size: 18px;
-      }
-      .bento-card h3 { font-family: var(--serif); font-weight: 400; font-size: 18px; margin-bottom: 8px; }
-      .bento-card p { color: var(--muted); font-size: 13px; line-height: 1.6; }
-
-      /* ========== WORK ========== */
-      .work-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
-      @media (min-width: 640px) { .work-grid { grid-template-columns: 1fr 1fr 1fr; } }
-
-      .work-card {
-        border-radius: 16px; border: 1px solid var(--border);
-        background: var(--surface); overflow: hidden; transition: all 0.3s ease;
-      }
-      .work-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-
-      .work-visual {
-        aspect-ratio: 16/10;
-        background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(0,255,136,0.03));
-        display: flex; align-items: center; justify-content: center;
-        border-bottom: 1px solid var(--border);
-      }
-      .work-visual span { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted2); }
-
-      .work-body { padding: 20px; }
-      .work-body h3 { font-family: var(--serif); font-size: 16px; font-weight: 400; margin-bottom: 4px; }
-      .work-body p { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
-      .work-metric {
-        display: inline-block; padding: 4px 10px; border-radius: 6px;
-        background: var(--green-soft); color: var(--green); font-size: 12px; font-weight: 600;
-      }
-
-      /* ========== POV ========== */
-      .pov { border-top: 1px solid var(--border); }
-      .pov-grid { display: flex; flex-direction: column; gap: 48px; margin-top: 48px; }
-
-      .pov-text { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 620px; }
-      .pov-items { display: grid; grid-template-columns: 1fr; gap: 16px; }
-      @media (min-width: 768px) { .pov-items { grid-template-columns: 1fr 1fr 1fr; } }
-
-      .pov-item {
-        display: flex; gap: 16px; align-items: flex-start;
-        padding: 20px; border-radius: 14px;
-        border: 1px solid var(--border); background: var(--surface);
-      }
-      .pov-item-icon {
-        width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
-        background: var(--green-soft);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--green); font-size: 14px; font-weight: 700;
-      }
-      .pov-item h4 { font-family: var(--serif); font-weight: 400; font-size: 15px; margin-bottom: 2px; }
-      .pov-item p { color: var(--muted); font-size: 13px; }
-
-      /* ========== TESTIMONIALS ========== */
-      .testimonials-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
-      @media (min-width: 640px) { .testimonials-grid { grid-template-columns: 1fr 1fr 1fr; } }
-
-      .test-card {
-        padding: 28px; border-radius: 16px;
-        border: 1px solid var(--border); background: var(--surface);
-      }
-      .test-card blockquote { font-size: 14px; line-height: 1.7; color: rgba(240,240,242,0.8); margin: 0 0 20px; font-style: normal; }
-      .test-author { display: flex; align-items: center; gap: 10px; }
-      .test-avatar {
-        width: 32px; height: 32px; border-radius: 8px;
-        background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(0,255,136,0.15));
-      }
-      .test-author strong { font-size: 13px; font-weight: 600; display: block; }
-      .test-author span { font-size: 11px; color: var(--muted2); }
-
-      /* ========== CTA ========== */
-      .final-cta { text-align: center; position: relative; overflow: hidden; }
-      .cta-orb {
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        width: 500px; height: 500px; border-radius: 50%;
-        background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 65%);
-        filter: blur(50px); pointer-events: none;
-      }
-      .final-cta .section-title,
-      .final-cta .section-desc,
-      .final-cta .section-tag,
-      .final-cta .hero-actions { position: relative; z-index: 2; }
-
-      /* ========== FOOTER ========== */
-      .footer { border-top: 1px solid var(--border); padding: 48px 0 36px; }
-      .footer-inner { display: flex; flex-direction: column; gap: 32px; }
-      @media (min-width: 640px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
-
-      .footer-brand { font-family: var(--serif); font-size: 17px; }
-      .footer-brand span { display: block; color: var(--muted2); font-size: 13px; font-family: var(--sans); font-weight: 400; margin-top: 6px; }
-      .footer-links { display: flex; flex-wrap: wrap; gap: 20px 28px; }
-      .footer-links a { color: var(--muted); font-size: 13px; transition: color 0.2s; }
-      .footer-links a:hover { color: var(--text); }
-
-      .footer-bottom {
-        display: flex; flex-direction: column; gap: 16px;
-        margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border);
-      }
-      @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
-      .footer-copy { color: var(--muted2); font-size: 11px; }
-
-      .social-link {
-        width: 34px; height: 34px; border-radius: 8px;
-        border: 1px solid var(--border);
-        display: inline-flex; align-items: center; justify-content: center;
-        color: var(--muted); transition: all 0.2s;
-      }
-      .social-link:hover { border-color: var(--border-hover); color: var(--text); }
-
-      .link-cta {
-        display: inline-flex; align-items: center; gap: 6px;
-        color: var(--purple); font-size: 13px; font-weight: 600; transition: gap 0.2s;
-      }
-      .link-cta:hover { gap: 10px; }
-
-      .divider { height: 1px; background: var(--border); margin: 0; border: none; }
-
-      .grad-text {
-        font-family: var(--serif); font-style: italic;
-        background: linear-gradient(135deg, var(--purple), var(--green));
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-      }
-
-      @media (max-width: 639px) {
-        .bento-card { padding: 24px; }
-        .work-body { padding: 16px; }
-        .test-card { padding: 22px; }
-      }
-    </style>
+    <script>document.documentElement.classList.add('js')</script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <meta name="theme-color" content="#09090b">
   </head>
-  <body>
-
-    <!-- ========== NAV ========== -->
-    <nav class="nav">
-      <div class="nav-inner">
-        <a class="brand" href="#">
-          <img class="brand-mark" src="logo_png_2.png" alt="Dual Frame Creative" width="30" height="30">
-          Dual Frame Creative
-        </a>
-        <div class="nav-links">
-          <a href="work.html">Work</a>
-          <a href="services.html">Services</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="mark" aria-hidden="true"><span></span><span></span></span>Dual Frame</a>
+    <ul class="nav-links">
+      <li><a href="/work.html">Work</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/testimonials.html">Testimonials</a></li>
+      <li><a class="btn btn-dark" href="mailto:hello@dualframecreative.com">Email us</a></li>
+    </ul>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+<nav class="menu" id="menu" aria-label="Menu">
+  <a href="/index.html" aria-current="page">Home</a>
+  <a href="/work.html">Work</a>
+  <a href="/services.html">Services</a>
+  <a href="/about.html">About</a>
+  <a href="/testimonials.html">Testimonials</a>
+  <a href="/contact.html">Contact</a>
+  <a class="btn btn-light" href="mailto:hello@dualframecreative.com">Email us</a>
+</nav>
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-box">
+        <div class="hero-copy">
+          <span class="tag" style="align-self:flex-start">Content marketing agency · Nashville</span>
+          <h1>Content that doesn't just look good. <span class="purple">It performs.</span></h1>
+          <p class="lead">Strategy, short-form video, and execution built to compound. We help modern brands turn attention into momentum.</p>
+          <div class="actions" style="margin-top:8px">
+            <a class="btn btn-dark" href="mailto:hello@dualframecreative.com">Email us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-light" href="/work.html">View work</a>
+          </div>
+          <p class="note">Built for founders, creators, and brands who want results.</p>
         </div>
-        <a class="nav-cta" href="contact.html">Book a Call</a>
-      </div>
-    </nav>
-
-    <main>
-
-      <!-- ========== HERO ========== -->
-      <section class="hero-section">
-        <video class="hero-video hero-video-desktop" muted loop playsinline preload="auto">
-          <source src="DualFrame.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video hero-video-mobile" muted loop playsinline preload="auto">
-          <source src="DualFrameMobile.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-
-        <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">
-          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-          <svg class="icon-unmuted" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        </button>
-
-        <div class="hero-content">
-          <div class="hero-badge fade-in d1">
-            <div class="hero-badge-dot"></div>
-            Content Marketing Agency
-          </div>
-
-          <h1 class="fade-in d2" style="text-align:center;">Content that doesn't just look good.<br><em>It performs.</em></h1>
-          <p class="hero-desc fade-in d3" style="text-align:center; margin-left:auto; margin-right:auto;">Strategy, short-form video, and execution built to compound. We help modern brands turn attention into momentum.</p>
-          <div class="hero-actions fade-in d4" style="justify-content:center;">
-            <a class="btn btn-primary" href="contact.html">Book a Call <span class="btn-arrow">&rarr;</span></a>
-            <a class="btn btn-ghost" href="work.html">View Work</a>
-          </div>
-          <p class="hero-note fade-in d5" style="text-align:center;">Built for founders, creators, and brands who want results.</p>
-        </div>
-      </section>
-
-      <!-- ========== SERVICES ========== -->
-      <section>
-        <div class="container">
-          <div class="section-tag center fade-in">Services</div>
-          <h2 class="section-title center fade-in d1">What we build</h2>
-          <p class="section-desc center fade-in d2">A systems approach to content&mdash;strategy, creation, and optimization working together.</p>
-
-          <div class="bento">
-            <div class="bento-card wide fade-in d2">
-              <div class="bento-icon">&#x1F4CB;</div>
-              <h3>Content Strategy</h3>
-              <p>Platform-specific planning and direction that makes execution easier. We map your goals to content that moves.</p>
-            </div>
-            <div class="bento-card wide fade-in d3">
-              <div class="bento-icon">&#x1F3AC;</div>
-              <h3>Content Creation</h3>
-              <p>Real-world + AI-assisted content, including static image creative, brand logos, and more. Brand-safe and built for modern attention. Every asset has a purpose.</p>
-            </div>
-            <div class="bento-card wide fade-in d4">
-              <div class="bento-icon">&#x1F4F1;</div>
-              <h3>Short-Form Video</h3>
-              <p>Editing optimized for retention, hooks, and conversion across every platform.</p>
-            </div>
-            <div class="bento-card wide fade-in d5">
-              <div class="bento-icon">&#x1F4C8;</div>
-              <h3>Performance + Optimization</h3>
-              <p>Tracking what works, improving what doesn't, scaling what performs.</p>
-            </div>
-          </div>
-
-          <div style="margin-top: 32px;">
-            <a class="link-cta" href="services.html">Explore all services <span>&rarr;</span></a>
-          </div>
-        </div>
-      </section>
-
-      <hr class="divider container">
-
-      <!-- ========== WORK ========== -->
-      <section>
-        <div class="container">
-          <div class="section-tag center fade-in">Work</div>
-          <h2 class="section-title center fade-in d1">Work that speaks.</h2>
-          <p class="section-desc center fade-in d2">We have experience working with some of the world's top brands.</p>
-
-          <div class="fade-in d2">
-            <img src="sponsors.png" alt="Clients and partners" width="1052" height="400" style="width:100%; height:auto; border-radius:16px;">
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ========== POV ========== -->
-      <section class="pov">
-        <div class="container">
-          <div class="section-tag fade-in">Our POV</div>
-          <h2 class="section-title fade-in d1">Your content shouldn't depend on <em class="grad-text">motivation</em>.</h2>
-
-          <div class="pov-grid">
-            <div class="pov-text fade-in d2">
-              Most brands don't have a content problem&mdash;they have a system problem. Dual Frame builds content that looks premium, moves fast, and compounds over time.
-            </div>
-            <div class="pov-items">
-              <div class="pov-item fade-in d3">
-                <div class="pov-item-icon">&#x25CE;</div>
-                <div><h4>Strategy-first</h4><p>Every post has a job. No filler, no fluff.</p></div>
-              </div>
-              <div class="pov-item fade-in d4">
-                <div class="pov-item-icon">&#x26A1;</div>
-                <div><h4>Built for speed</h4><p>Output without chaos. Systems that scale.</p></div>
-              </div>
-              <div class="pov-item fade-in d5">
-                <div class="pov-item-icon">&#x2197;</div>
-                <div><h4>Designed to convert</h4><p>Attention is step one. Action is the goal.</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <hr class="divider container">
-
-      <!-- ========== TESTIMONIALS ========== -->
-      <section>
-        <div class="container">
-          <div class="section-tag center fade-in">Testimonials</div>
-          <h2 class="section-title center fade-in d1">What clients say</h2>
-          <p class="section-desc center fade-in d2">Fast communication. Clean execution. Strategy that actually shows up in the work.</p>
-
-          <div class="testimonials-grid">
-            <div class="test-card fade-in d2">
-              <blockquote>"Advaith (Founder/CEO of Dual Frame) and his team were professional to deal with and delivered exactly what was scoped. He promptly made small edits and ensured that the content was made to suit various audiences. Would recommend for anyone wanting high-quality content."</blockquote>
-              <div class="test-author">
-                <div class="test-avatar"></div>
-                <div><strong>Alchemy Studios, Real Estate Client</strong></div>
-              </div>
-            </div>
-            <div class="test-card fade-in d3">
-              <blockquote>"In just one month of working with Advaith (Founder/CEO of Dual Frame) I feel much more organized and comfortable posting new content. My personal training business feels more like a brand than just me posting content. It has paid for itself."</blockquote>
-              <div class="test-author">
-                <div class="test-avatar"></div>
-                <div><strong>Kyle Barsha, Fitness Trainer / Nutritionist</strong></div>
-              </div>
-            </div>
-            <div class="test-card fade-in d4">
-              <blockquote>"Advaith (Founder/CEO of Dual Frame) played a critical role in helping us develop a cohesive brand identity, define our mission, and translate that vision into a clear marketing strategy. One of the most talented and creative individuals I've worked with."</blockquote>
-              <div class="test-author">
-                <div class="test-avatar"></div>
-                <div><strong>HLTHi, Healthcare Client</strong></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========== FINAL CTA ========== -->
-      <section class="final-cta">
-        <div class="container">
-          <div class="cta-orb"></div>
-          <div class="section-tag center fade-in">Let's talk</div>
-          <h2 class="section-title center fade-in d1">Ready to build content that <em class="grad-text">performs</em>?</h2>
-          <p class="section-desc center fade-in d2">If you're serious about growth, we'll build the system behind it.</p>
-          <div class="hero-actions fade-in d3" style="justify-content: center;">
-            <a class="btn btn-primary" href="contact.html">Book a Call <span class="btn-arrow">&rarr;</span></a>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <div class="footer-brand">
-            Dual Frame Creative
-            <span>hello@dualframecreative.com</span>
-          </div>
-          <div class="footer-links">
-            <a href="work.html">Work</a>
-            <a href="services.html">Services</a>
-            <a href="about.html">About</a>
-            <a href="testimonials.html">Testimonials</a>
-            <a href="contact.html">Contact</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="footer-copy">&copy; 2026 Dual Frame Creative. All rights reserved.</div>
-          <div style="display:flex; gap:8px;">
-            <a class="social-link" href="https://instagram.com/dual_frame_creative" target="_blank" aria-label="Instagram">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a class="social-link" href="https://www.linkedin.com/in/advaith-srikanth-42453bb2" target="_blank" aria-label="LinkedIn">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-          </div>
+        <div class="hero-visual" aria-label="Client work">
+          <div class="phone one"><img src="/shorts/9QDUzuhbE8A.jpg" alt="HLTHi short-form video"></div>
+          <div class="phone two"><img src="/shorts/R8BZqQbBuXk.jpg" alt="Tiply short-form video"></div>
+          <div class="stat-card a"><b>~17k</b><span>HLTHi organic views<br>in 6 weeks, $0 ad spend</span></div>
+          <div class="stat-card b"><b>554</b><span>Tiply new paying users<br>in the first month</span></div>
         </div>
       </div>
-    </footer>
+    </div>
+  </section>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var desktopVideo = document.querySelector('.hero-video-desktop');
-        var mobileVideo = document.querySelector('.hero-video-mobile');
-        var btn = document.getElementById('soundToggle');
-        if (!btn) return;
+  <div style="margin-top:clamp(40px, 5vw, 64px)">
+  <div class="ticker " aria-hidden="true"><div class="ticker-track"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Content strategy</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Content creation</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Short-form video</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Performance + optimization</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Results over reels</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Content strategy</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Content creation</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Short-form video</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Performance + optimization</span><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg>Results over reels</span></div></div>
+  </div>
 
-        function getVisibleVideo() {
-          if (window.innerWidth >= 768) return desktopVideo;
-          return mobileVideo;
-        }
+  <div class="wrap" style="padding-top:clamp(40px, 5vw, 64px)">
+    <div class="stats">
+      <div><b>~17k</b><span>Organic video views in 6 weeks, zero paid spend</span></div>
+      <div class="on-purple"><b>+226%</b><span>Organic Instagram views, month over month</span></div>
+      <div><b>554</b><span>New paying users on the platform in the first month</span></div>
+      <div class="on-black"><b>7+ yrs</b><span>Agency experience across NYC and Nashville</span></div>
+    </div>
+  </div>
 
-        // Ensure only the visible video plays muted, hidden video is paused
-        function syncVideos() {
-          var visible = getVisibleVideo();
-          var hidden = (visible === desktopVideo) ? mobileVideo : desktopVideo;
-          if (hidden) { hidden.pause(); hidden.muted = true; }
-          if (visible) {
-            visible.muted = true;
-            visible.setAttribute('muted', '');
-            var p = visible.play();
-            if (p && p.catch) p.catch(function(){});
-          }
-          btn.classList.remove('is-unmuted');
-        }
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <h2>What we build</h2>
+        <p class="lead">A systems approach to content—strategy, creation, and optimization working together.</p>
+      </div>
+      <div class="bento">
+        <article class="tile tile-video lift">
+          <div class="copy">
+            <span class="tag">Short-form video</span>
+            <h3>Editing optimized for retention, hooks, and conversion.</h3>
+            <p>Across every platform.</p>
+          </div>
+          <div class="thumbs">
+            <img src="/shorts/vumfPkUYZEU.jpg" alt="Tiply short-form video" loading="lazy">
+            <img src="/shorts/Acjt0L_kBZM.jpg" alt="Alchemy Studios short-form video" loading="lazy">
+          </div>
+        </article>
+        <article class="tile tile-strategy lift">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <span class="tag">Content strategy</span>
+            <h3>Platform-specific planning and direction.</h3>
+            <p>Direction that makes execution easier. We map your goals to content that moves.</p>
+          </div>
+          <p class="big">Every post has a job. No filler, no fluff.</p>
+        </article>
+        <article class="tile tile-creation lift">
+          <span class="tag">Content creation</span>
+          <h3>Real-world + AI-assisted content.</h3>
+          <p>Static image creative, brand logos, and more. Brand-safe and built for modern attention.</p>
+        </article>
+        <article class="tile tile-perf lift">
+          <span class="tag">Performance + optimization</span>
+          <div class="num">+155%</div>
+          <small>HLTHi organic Facebook views, month over month</small>
+          <p>Tracking what works, improving what doesn't, scaling what performs.</p>
+        </article>
+      </div>
+      <a class="more" href="/services.html">Explore all services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
 
-        // Start playback on load and retry after short delay for mobile timing
-        syncVideos();
-        setTimeout(syncVideos, 500);
-        window.addEventListener('resize', syncVideos);
+  <section class="block bg-paper rule-top rule-bottom">
+    <div class="wrap">
+      <div class="head">
+        <h2>Work that <span class="mark-green">speaks.</span></h2>
+        <p class="lead">Results over reels.</p>
+      </div>
 
-        btn.addEventListener('click', function() {
-          var video = getVisibleVideo();
-          if (!video) return;
-          if (video.paused) {
-            video.muted = true;
-            video.play().then(function() {
-              video.muted = false;
-              btn.classList.add('is-unmuted');
-            }).catch(function(){});
-          } else {
-            video.muted = !video.muted;
-            btn.classList.toggle('is-unmuted', !video.muted);
-          }
-        });
-      });
-    </script>
+      <article class="feature lift">
+        <div class="feature-media">
+          <a class="clip" href="https://youtube.com/shorts/UDmhPwpA6v4" data-yt="UDmhPwpA6v4" aria-label="Play: HLTHi AI-generated brand awareness video"><img src="/shorts/UDmhPwpA6v4.jpg" alt="" loading="lazy"><span class="play-dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span></a>
+          <a class="clip" href="https://youtube.com/shorts/Oq8B4BGlFHk" data-yt="Oq8B4BGlFHk" aria-label="Play: HLTHi AI user-generated-content video"><img src="/shorts/Oq8B4BGlFHk.jpg" alt="" loading="lazy"><span class="play-dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span></a>
+          <a class="clip" href="https://youtube.com/shorts/9QDUzuhbE8A" data-yt="9QDUzuhbE8A" aria-label="Play: HLTHi organic telehealth awareness content"><img src="/shorts/9QDUzuhbE8A.jpg" alt="" loading="lazy"><span class="play-dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span></a>
+        </div>
+        <div class="feature-body">
+          <div class="client"><strong>HLTHi</strong><span class="tag">Healthcare</span></div>
+          <p class="goal"><b>Goal:</b> new patient signups. Organic short-form content strategy for a telehealth company.</p>
+          <div class="figs">
+            <div><b>~17k</b><span>Organic views in 6 weeks, zero paid spend</span></div>
+            <div><b>+226%</b><span>Instagram views, month over month</span></div>
+            <div><b>+155%</b><span>Facebook views, month over month</span></div>
+          </div>
+        </div>
+      </article>
 
-  </body>
+      <div class="pair">
+        <article class="case lift">
+          <a class="clip" href="https://youtube.com/shorts/fw9wHec1QK4" data-yt="fw9wHec1QK4" aria-label="Play: Tiply brand launch video"><img src="/shorts/fw9wHec1QK4.jpg" alt="" loading="lazy"><span class="play-dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span></a>
+          <div class="case-body">
+            <strong>Tiply</strong>
+            <div class="case-figure purple">554</div>
+            <p class="case-label">New paying users on the platform in the first month</p>
+            <span class="tag" style="align-self:flex-start">Music software</span>
+          </div>
+        </article>
+        <article class="case lift">
+          <a class="clip" href="https://youtube.com/shorts/V0RYzz0GIPM" data-yt="V0RYzz0GIPM" aria-label="Play: Alchemy Studios property showcase, Ubud, Bali"><img src="/shorts/V0RYzz0GIPM.jpg" alt="" loading="lazy"><span class="play-dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span></a>
+          <div class="case-body">
+            <strong>Alchemy Studios</strong>
+            <div class="case-figure green">For sale</div>
+            <p class="case-label">Property now listed for sale, with videos driving buyer interest from organic reach</p>
+            <span class="tag" style="align-self:flex-start">Real estate · Bali</span>
+          </div>
+        </article>
+      </div>
+      <a class="more" href="/work.html">See all case studies <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap founder-grid">
+      <div class="frames">
+        <img src="/founder-photo.png" alt="Advaith Srikanth, founder of Dual Frame Creative" loading="lazy">
+        <span class="tag">Advaith Srikanth · Founder/CEO</span>
+      </div>
+      <div class="founder-copy">
+        <h2>Built by an experienced marketing strategist.</h2>
+        <p>Dual Frame is a Nashville-based content marketing agency for brands that care about performance as much as aesthetics. I'm a student of culture with a constant pulse on how brands show up and stand out across today's platforms.</p>
+        <div class="facts">
+          <span class="tag">7+ years in agencies</span>
+          <span class="tag">2 in NYC, 1 in Nashville</span>
+          <span class="tag">B.S. Public Relations, Ball State</span>
+        </div>
+        <div><a class="btn btn-light" href="/about.html">About Dual Frame</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block bg-black">
+    <div class="wrap">
+      <div class="head">
+        <h2>Big-brand experience.</h2>
+        <p class="lead">Before Dual Frame, Advaith worked on campaigns for these brands at agencies in New York and Nashville.</p>
+      </div>
+      <div class="brand-grid">
+        <span><img src="/brands/microsoft.jpg" alt="Microsoft" loading="lazy"></span>
+        <span><img src="/brands/cocacola.jpg" alt="Coca-Cola" loading="lazy"></span>
+        <span><img src="/brands/astrazeneca.jpg" alt="AstraZeneca" loading="lazy"></span>
+        <span><img src="/brands/dollargeneral.jpg" alt="Dollar General" loading="lazy"></span>
+        <span><img src="/brands/jobcorps.jpg" alt="Job Corps" loading="lazy"></span>
+        <span><img src="/brands/hennessy.jpg" alt="Hennessy" loading="lazy"></span>
+        <span><img src="/brands/bankofamerica.jpg" alt="Bank of America" loading="lazy"></span>
+        <span><img src="/brands/ejgallo.jpg" alt="E&amp;J Gallo Winery" loading="lazy"></span>
+        <span><img src="/brands/nycfc.jpg" alt="New York City FC" loading="lazy"></span>
+        <span><img src="/brands/lamborghini.jpg" alt="Lamborghini" loading="lazy"></span>
+        <span><img src="/brands/hills.jpg" alt="Hill's" loading="lazy"></span>
+        <span><img src="/brands/chipotle.jpg" alt="Chipotle" loading="lazy"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block bg-lilac rule-bottom">
+    <div class="wrap quote-grid">
+      <div class="qmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 20v-6.5C4 8.4 6.6 5.3 10.4 4l.9 1.9C9 7 7.9 8.8 7.8 11H11v9H4zm9 0v-6.5c0-5.1 2.6-8.2 6.4-9.5l.9 1.9C18 7 16.9 8.8 16.8 11H20v9h-7z"/></svg></div>
+      <figure>
+        <blockquote class="big-quote">“My personal training business feels more like a brand than just me posting content. <span class="mark-green">It has paid for itself.</span>”</blockquote>
+        <figcaption class="cite"><span class="initials">KB</span><div><b>Kyle Barsha</b><span>Fitness Trainer / Nutritionist</span></div><a class="more" href="/testimonials.html">Read all testimonials <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta-box ">
+        <div>
+          <h2>Ready to build content that performs?</h2>
+          <p>If you're serious about growth, we'll build the system behind it.</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-light" href="mailto:hello@dualframecreative.com">Email us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-dark" href="/contact.html">Send a brief</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="/"><span class="mark" aria-hidden="true"><span></span><span></span></span>Dual Frame Creative</a>
+        <p>A content marketing agency in Nashville, TN. We typically respond within 24 hours.</p>
+      </div>
+      <div><h4>Company</h4><ul><li><a href="/work.html">Work</a></li><li><a href="/services.html">Services</a></li><li><a href="/about.html">About</a></li><li><a href="/testimonials.html">Testimonials</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:hello@dualframecreative.com">hello@dualframecreative.com</a></li><li><a href="https://instagram.com/dual_frame_creative">Instagram</a></li><li><a href="https://www.linkedin.com/in/advaith-srikanth-42453bb2">LinkedIn</a></li></ul></div>
+    </div>
+    <p class="legal">&copy; 2026 Dual Frame Creative. All rights reserved.</p>
+  </div>
+</footer>
+<dialog class="player" id="player" aria-label="Client video">
+  <button class="player-close" type="button" aria-label="Close video">&times;</button>
+  <div class="player-frame"></div>
+</dialog>
+<script src="/site.js" defer></script>
+</body>
 </html>
